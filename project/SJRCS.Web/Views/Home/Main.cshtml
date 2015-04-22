@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section Script{
+<script>
+    $(function () {
+        var firstUrl = $('#left_menu a').first().attr("href");
+        $('#ifrMain').attr('src', firstUrl);
+    });
+</script>
+}
+<div class="header">
+    <img src="/Content/Images/logo.gif" alt="logo"  />
+</div>
+<div class="login_info">
+    <span>欢迎您，@ViewBag.UserName</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="btnExit" type="button" class="btn btn-primary">退出</button>
+</div>
+<div class="main_left">
+   <ul class="menu_level_first">
+       <li>功能导航</li>
+   </ul>
+   <ul id="left_menu" class="menu_level_second">
+       @foreach (dynamic power in ViewBag.Powers)
+       {
+           <li><a href="@power.URL" target="ifrMain">@power.NAME</a></li>
+       }
+   </ul>
+</div>
+<div class="main_content">
+    <iframe id="ifrMain" name="ifrMain" class="frame_content" src="" frameborder="0"></iframe>
+</div>
+<div class="footer">
+    <div class="footer_text">
+        版本 V1.0
+    </div>
+</div>

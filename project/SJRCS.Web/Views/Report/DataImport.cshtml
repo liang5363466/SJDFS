@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <script src="/Scripts/Report/DataImport.js"></script>
+}
+<form id="dataImportForm" class="form-horizontal" action="/Report/DataImport?tableId=@Request["tableId"]" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">数据名称：</label>
+            <div class="controls">
+                <input id="txtAuditDataName" name="dataName" type="text" class="input-text" style="width: 380px" form-val="empty,maxlength(500)" val-empty-msg="数据名称不能为空。" val-maxlength-msg="您最多只能输入500个字。" msg-ctrl-id="txtDataNameError" />
+                <span class="error-block" id="txtDataNameError"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">数据文件：</label>
+            <div class="controls">
+                <input class="input-file" id="tableFile" name="importfile" type="file" style="width: 400px;" />
+                <span class="error-block" id="txtTableFileError"></span>
+            </div>
+        </div>
+    </fieldset>
+</form>

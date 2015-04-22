@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@model PagedList<Dynamic>
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/Scripts/Report/ReporterTables.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="#">数据上报</a> <span class="divider">/</span></li>
+    <li class="active">列表</li>
+</ul>
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>名 称
+            </th>
+            <th width="80">上报类型
+            </th>
+            <th width="60">未提交
+            </th>
+            <th width="60">未通过
+            </th>
+            <th width="60">未审核
+            </th>
+            <th width="60">已审核
+            </th>
+            <th width="350">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr>
+                <td><span title="@item.NAME" form-val="textwarp">@item.NAME</span></td>
+                <td>@ViewUtils.GetTableTypeDescript(item.TYPE)</td>
+                <td>
+                    <a href="/Report/ReportTableData?tableId=@item.ID&status=@RCS_AuditStatus.UnCommit">@item.UNCOMMIT 条</a>
+                </td>
+                <td>
+                    <a href="/Report/ReportTableData?tableId=@item.ID&status=@RCS_AuditStatus.UnPass" style="color:red">@item.UNPASS 条</a>
+                </td>
+                <td>
+                    <a href="/Report/ReportTableData?tableId=@item.ID&status=@RCS_AuditStatus.UnAudit">@item.UNAUDIT 条</a>
+                </td>
+                <td>
+                    <a href="/Report/ReportTableData?tableId=@item.ID&status=@RCS_AuditStatus.Audited" style="color:green">@item.AUDITED 条</a>
+                </td>
+                <td table-id="@item.ID">
+                    <button class="btn btn-mini" title="下载表样" operate="download"><i class="icon-download"></i> 下载</button>
+                    <button class="btn btn-mini" title="将您本地的Excel表数据导入进该表样" operate="dataimport"><i class="icon-download-alt"></i> 导入</button>
+                    <button class="btn btn-mini" title="查看您上报的历史数据" operate="viewdata"><i class="icon-search"></i> 查看</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

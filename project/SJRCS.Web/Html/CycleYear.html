@@ -1,0 +1,31 @@
+﻿<script>
+    $("#txtYearStart").click(function () {
+        WdatePicker({
+            skin: 'default', dateFmt: 'MM月dd', isShowClear: false, readOnly: true, onpicked: function (dp) {
+                var islessThan = dp.cal.getNewDateStr() <= $("#txtYearEnd").val();
+                if (!islessThan) {
+                    alert("必须小于结束时间!");
+                    $(this).val("01月01");
+                    return true;
+                }
+            }
+        });
+    });
+    $("#txtYearEnd").click(function () {
+        WdatePicker({
+            skin: 'default', dateFmt: 'MM月dd', isShowClear: false, readOnly: true, onpicked: function (dp) {
+                var ismoreThan = dp.cal.getNewDateStr() >= $("#txtYearStart").val();
+                if (!ismoreThan) {
+                    alert("必须大于开始时间!");
+                    $(this).val("12月31");
+                    return true;
+                }
+            }
+        });
+    });
+</script>
+<input id="txtYearStart" name="CycleYearStart" class="input-mini low" type="text" value="01月01" readonly="readonly"/>
+<span>&nbsp;号</span>
+<span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+<input id="txtYearEnd" name="CycleYearEnd" class="input-mini low"  type="text" value="12月31" readonly="readonly"/>
+<span>号&nbsp;</span>

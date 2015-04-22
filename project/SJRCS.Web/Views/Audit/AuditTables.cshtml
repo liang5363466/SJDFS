@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@model PagedList<Dynamic>
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/Scripts/Audit/AuditTables.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="#">数据审核</a> <span class="divider">/</span></li>
+    <li class="active">列表</li>
+</ul>
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>名 称
+            </th>
+            <th width="80">上报类型
+            </th>
+            <th width="60">未审核
+            </th>
+            <th width="60">未通过
+            </th>
+            <th width="60">已审核
+            </th>
+            <th width="350">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr>
+                <td><span title="@item.NAME" form-val="textwarp">@item.NAME</span></td>
+                <td>@ViewUtils.GetTableTypeDescript(item.TYPE)</td>
+                <td>
+                    <a href="/Audit/AuditTableData?tableId=@item.ID&status=@RCS_AuditStatus.UnAudit" style="color:red">@item.UNAUDIT 条</a>
+                </td>
+                <td>
+                    <a href="/Audit/AuditTableData?tableId=@item.ID&status=@RCS_AuditStatus.UnPass">@item.UNPASS 条</a>
+                </td>
+                <td>
+                    <a href="/Audit/AuditTableData?tableId=@item.ID&status=@RCS_AuditStatus.Audited" style="color:green">@item.AUDITED 条</a>
+                </td>
+                <td table-id="@item.ID">
+                    <button class="btn btn-mini" title="对已入库的数据进行数据导出" operate="export"><i class="icon-share-alt"></i> 导出</button>
+                    <button class="btn btn-mini" title="查看审核数据详细" operate="viewdata"><i class="icon-search"></i> 详细</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

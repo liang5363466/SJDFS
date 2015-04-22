@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <link href="/Plugins/zTree/css/zTreeStyle.css" rel="stylesheet" />
+    <script src="/Plugins/zTree/js/jquery.ztree.core-3.5.min.js"></script>
+    <script src="/Scripts/Contact/Main.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="#">联系人设置</a> <span class="divider">/</span></li>
+    <li class="active">列表</li>
+</ul>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2" style="overflow-y:scroll">
+             <ul id="orgTree" class="ztree"></ul>
+        </div>
+        <div class="span10">
+             <iframe id="ifrOrgUsers" frameborder="0" src="/Contact/OrgUsers?orgCode=0&pageIndex=1"></iframe>
+        </div>
+    </div>
+</div>

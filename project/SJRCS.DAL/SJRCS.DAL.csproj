@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{290F1870-AA30-465E-AB6F-BC5D8B78234C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SJRCS.DAL</RootNamespace>
+    <AssemblyName>SJRCS.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Devart.Data, Version=5.0.818.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL" />
+    <Reference Include="Devart.Data.Oracle, Version=8.1.26.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infrastructure\BaseDAL.cs" />
+    <Compile Include="Interface\IRCS_ContactsDAL.cs" />
+    <Compile Include="Interface\IRCS_DataAuditsDAL.cs" />
+    <Compile Include="Interface\IRCS_DataTableDAL.cs" />
+    <Compile Include="Interface\IRCS_OrgInfoDAL.cs" />
+    <Compile Include="Interface\IRCS_FieldExpandsDAL.cs" />
+    <Compile Include="Interface\IRCS_FillRulesDAL.cs" />
+    <Compile Include="Interface\IRCS_TableHeadsDAL.cs" />
+    <Compile Include="Interface\IRCS_TablesDAL.cs" />
+    <Compile Include="Interface\IRCS_UserDAL.cs" />
+    <Compile Include="Interface\IRCS_AuthorsDAL.cs" />
+    <Compile Include="Interface\IRCS_PowerDAL.cs" />
+    <Compile Include="RCS_ContactsDAL.cs" />
+    <Compile Include="RCS_DataAuditsDAL.cs" />
+    <Compile Include="RCS_DataTableDAL.cs" />
+    <Compile Include="RCS_OrgInfoDAL.cs" />
+    <Compile Include="RCS_FieldExpandsDAL.cs" />
+    <Compile Include="RCS_FillRulesDAL.cs" />
+    <Compile Include="RCS_PowerDAL.cs" />
+    <Compile Include="RCS_TableHeadsDAL.cs" />
+    <Compile Include="RCS_TablesDAL.cs" />
+    <Compile Include="RCS_UserDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RCS_AuthorsDAL.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SJRCS.Common\SJRCS.Common.csproj">
+      <Project>{8ba7e961-9a1c-4671-8217-4e1e6e0a3465}</Project>
+      <Name>SJRCS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.DALProfile\SJRCS.DALProfile.csproj">
+      <Project>{d963e7b1-987f-435f-9933-974d8a818167}</Project>
+      <Name>SJRCS.DALProfile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Model\SJRCS.Model.csproj">
+      <Project>{b8a69430-4421-426c-92e8-468aa1d34d30}</Project>
+      <Name>SJRCS.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

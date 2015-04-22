@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/Scripts/Audit/AuditTableData.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="/Audit/AuditTables">数据审核</a> <span class="divider">/</span></li>
+    <li class="active">@ViewBag.Data.NAME</li>
+</ul>
+<div class="operate">
+      <a href="/Audit/AuditTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.UnAudit" class="button button-flat-primary button-small" status="@RCS_AuditStatus.UnAudit">未审核</a>
+    丨<a href="/Audit/AuditTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.UnPass" class="button button-flat-primary button-small" status="@RCS_AuditStatus.UnPass">未通过</a>
+    丨<a href="/Audit/AuditTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.Audited" class="button button-flat-primary button-small" status="@RCS_AuditStatus.Audited">已审核</a>
+</div>
+@RenderBody()

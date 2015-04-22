@@ -1,0 +1,16 @@
+JYJYDW  JYJYDW  (数据仓库数据库)
+
+SA_T_ORG_INFO     机构表
+SA_XA_DEPT        部门表
+SA_XA_USER        用户表
+
+
+
+
+JSDM   JSDM  (科学决策数据库)
+F_MENU_TREE   菜单表
+F_ROLE        角色表
+F_USR_ROLE    用户角色关联表
+F_PWOER       权限表
+F_ROLE_POWER  角色权限关联表
+

@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/Scripts/Report/ReportTableData.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="/Report/ReporterTables">数据上报</a> <span class="divider">/</span></li>
+    <li class="active">@ViewBag.Data.NAME</li>
+</ul>
+<div class="operate">
+    <a id="btnStart" href="#" class="button button-flat-primary button-small"><i class="icon-pencil"></i> 开始上报</a>
+    丨<a id="btnDescript" href="#" class="button button-flat-primary button-small"><i class="icon-exclamation-sign"></i> 上报说明</a>
+    丨<a href="/Report/ReportTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.UnCommit" class="button button-flat-primary button-small" status="@RCS_AuditStatus.UnCommit">未提交</a>
+    丨<a href="/Report/ReportTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.UnPass" class="button button-flat-primary button-small" status="@RCS_AuditStatus.UnPass">未通过</a>
+    丨<a href="/Report/ReportTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.UnAudit" class="button button-flat-primary button-small" status="@RCS_AuditStatus.UnAudit">未审核</a>
+    丨<a href="/Report/ReportTableData?tableId=@Request["tableId"]&status=@RCS_AuditStatus.Audited" class="button button-flat-primary button-small" status="@RCS_AuditStatus.Audited">已审核</a>
+</div>
+@RenderBody()

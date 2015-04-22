@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <link href="/Plugins/zTree/css/zTreeStyle.css" rel="stylesheet" />
+    <script src="/Plugins/zTree/js/jquery.ztree.core-3.5.min.js"></script>
+    <script src="/Scripts/Table/SetTableRule.js"></script>
+}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span4" >
+            <ul id="orgTree" class="ztree" style="overflow-y:scroll;height:325px"></ul>
+		</div>
+		<div class="span8">
+            <iframe id="ifrOrgUsers" scrolling-x="no" style="width:350px;height:330px"  frameborder="0" src="/User/OrgUsers?tableId=@Request["tableId"]"></iframe>
+		</div>
+	</div>
+</div>

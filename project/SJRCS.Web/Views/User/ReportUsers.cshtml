@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <script src="/Scripts/User/ReportUsers.js"></script>
+}
+<div class="operate">
+    <a href="/User/OrgUsers?orgCode=@Request["orgCode"]&tableId=@Request["tableId"]" class="button button-flat-primary button-small">未设置</a>
+    丨
+    <a href="#" class="button button-flat-primary button-small" style="color: red">已设置</a>
+    丨
+    <a href="/Contact/AllContacts?tableId=@Request["tableId"]" class="button button-flat-primary button-small">常用联系人</a>
+</div>
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th >姓名
+            </th>
+            <th width="80">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr >
+                <td>
+                     <span title="@item.DISPLAY_NAME" form-val="textwarp">@item.DISPLAY_NAME</span>
+                </td>
+                <td userid="@item.REPORTER">
+                    <button class="btn btn-mini" operate="remove"><i class="icon-remove"></i> 移除</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

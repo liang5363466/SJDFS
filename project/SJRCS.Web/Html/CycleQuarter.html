@@ -1,0 +1,36 @@
+﻿<script>
+    $("#txtQuarterStart").click(function () {
+        WdatePicker({
+            skin: 'default', dateFmt: 'd', isShowClear: false, readOnly: true, onpicked: function (dp) {
+                var islessThan = parseInt(dp.cal.getNewDateStr()) <= parseInt($("#txtQuarterEnd").val());
+                if (!islessThan) {
+                    alert("必须小于结束时间!");
+                    $(this).val("1");
+                    return true;
+                }
+            }
+        });
+    });
+    $("#txtQuarterEnd").click(function () {
+        WdatePicker({
+            skin: 'default', dateFmt: 'd', isShowClear: false, readOnly: true, onpicked: function (dp) {
+                var ismoreThan = parseInt(dp.cal.getNewDateStr()) >= parseInt($("#txtQuarterStart").val());
+                if (!ismoreThan) {
+                    alert("必须大于开始时间!");
+                    $(this).val("30");
+                    return true;
+                }
+            }
+        });
+    });
+</script>
+<select id="cycleQuarter" name="CycleQuarter" class="input-small low">
+    <option value='1'>第一个月</option>
+    <option value='2'>第二个月</option>
+    <option value='3'>第三个月</option>
+</select>
+<input id="txtQuarterStart" name="CycleQuarterStart" class="input-mini low" type="text" value="1"  readonly="readonly"/>
+<span>&nbsp;号</span>
+<span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+<input id="txtQuarterEnd" name="CycleQuarterEnd" class="input-mini low" type="text" value="30" readonly="readonly"/>
+<span>号&nbsp;</span>

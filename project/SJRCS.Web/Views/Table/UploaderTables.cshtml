@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@model PagedList<Dynamic>
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/Scripts/Table/UploaderTables.js"></script>
+}
+<ul class="breadcrumb">
+    <li><a href="#">表样管理</a> <span class="divider">/</span></li>
+    <li class="active">列表</li>
+  </ul>
+<div class="operate">
+   <a id="btnUpload" href="#" class="button button-flat-primary button-small"><i class="icon-upload"></i> 表样上传</a>
+</div>
+<table  class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>名称
+            </th>
+            <th width="80">上报类型
+            </th>
+            <th width="120">上传时间
+            </th>
+            <th width="60">发布状态
+            </th>
+            <th width="60">上报状态
+            </th>
+            <th width="380">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr>
+                <td><span title="@item.NAME" form-val="textwarp">@item.NAME</span></td>
+                <td>@ViewUtils.GetTableTypeDescript(item.TYPE)</td>
+                <td>@item.CREATE_TIME</td>
+                <td>@Html.Raw(ViewUtils.GetTablePublishStatus(item.IS_PUBLISHED))</td>
+                <td>@Html.Raw(ViewUtils.GetTableIsAllowStatus(item.IS_ALLOW_REPORT,item.IS_INCYCLE))</td>
+                <td table-id="@item.ID" isInCycle="@item.IS_INCYCLE">
+                    @if (item.IS_PUBLISHED == RCS_IsPublished.False)
+                    {
+                        <button class="btn btn-mini" title="发布该表样" operate="publish"><i class="icon-ok"></i> 发布</button>
+                    }
+                    else
+                    {
+                        if (item.IS_ALLOW_REPORT == RCS_IsAllowReport.False || item.IS_INCYCLE == RCS_IsInCycle.False)
+	                    {
+		                    <button class="btn btn-mini" title="允许用户上报数据" operate="allow"><i class="icon-ok-circle"></i> 允许</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-mini" title="禁止用户上报数据" operate="ban"><i class="icon-ban-circle"></i> 禁止</button>
+                        }
+                    }
+                    <button class="btn btn-mini" title="下载表样" operate="download"><i class="icon-download"></i> 下载</button>
+                    <button class="btn btn-mini" title="修改上报信息" operate="edit"><i class="icon-edit"></i> 修改</button>
+                    <button class="btn btn-mini" title="设置该表样的上报人员" operate="setRule"><i class="icon-cog"></i> 设置</button>
+                    <button class="btn btn-mini" title="预览上传的表样" operate="view"><i class="icon-search"></i> 预览</button>
+                    @if (item.IS_ALLOW_REPORT == RCS_IsAllowReport.False)
+	                {
+		                <button class="btn btn-mini" title="删除该表样及其已上报的数据" operate="delete"><i class="icon-remove"></i> 删除</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

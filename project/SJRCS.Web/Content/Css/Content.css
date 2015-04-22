@@ -1,0 +1,36 @@
+﻿input[readonly] { cursor: pointer; background-color: #ffffff; }
+fieldset {margin-left:-90px;}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input { margin: 0; }
+.breadcrumb {padding: 4px 15px; margin-bottom: 0px; }
+.breadcrumb a{text-decoration: none;}
+.operate {border: 1px solid #e2f2f3; background: #f5fbfe; line-height: 25px; font-size: 12px; padding-left: 10px; }
+.operate a { text-decoration: none; }
+.data_pager { text-decoration: none; color: red; font-weight: bold; }
+.data_pager a {color: #3a87bd; font-weight: normal; }
+.table-striped thead tr { background-color: #dae9f5; }
+.table-striped thead tr th { text-align: left; padding-left: 10px; font-weight: bold; line-height: 16px; }
+.table-striped tbody tr:hover { background-color: #e4f3fc; }
+.table-striped tbody tr td { padding-left: 10px; }
+.table-striped tfoot tr { background-color: #dae9f5; }
+.table-striped tfoot tr td { text-align: left; padding-left: 10px; line-height: 25px; font-weight: bold; }
+.row-fluid .span8 { border: 1px solid #000000; }
+.row-fluid .span4 { border: 1px solid #000000; border-right: none; }
+.control-group { margin-bottom:0px;}
+.form-horizontal .control-group { margin-bottom:0px;}
+.error-block { display: block; color: red; line-height: 20px; height: 20px; }

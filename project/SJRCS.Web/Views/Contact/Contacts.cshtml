@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@model PagedList<dynamic>
+@section Script{
+    @{Html.RegisterMvcPagerScriptResource();}
+     <script src="/Scripts/Contact/Contacts.js"></script>
+}
+<div class="operate">
+   <a href="/Contact/OrgUsers?orgCode=@Request["orgCode"]"> 未设置</a>
+    丨
+   <a href="#" style="color:red"> 已设置</a>
+</div>
+<table  class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="150">姓名
+            </th>
+            <th width="150">性别
+            </th>
+            <th width="150">邮件
+            </th>
+            <th width="150">电话
+            </th>
+            <th>操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (dynamic item in Model)
+       {
+           <tr>
+               <td>@item.DISPLAY_NAME</td>
+               <td>@if(item.SEX == "001"){<span>女</span>}else{<span>男</span>}</td>
+               <td>@item.EMAIL</td>
+               <td>@item.TELEPHONE</td>
+                <td contactid="@item.USER_ID">
+                   <button class="btn btn-mini" operate="remove"><i class="icon-remove"></i> 移除</button>
+               </td>
+           </tr>
+       }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <script src="/Plugins/datepicker/WdatePicker.js"></script>
+    <script src="/Scripts/Table/TableUpload.js"></script>
+}
+<form id="uploadForm" class="form-horizontal" action="/Table/TableUpload" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">导出模板：</label>
+            <div class="controls">
+                <input id="exportTemplate" class="input-file" name="exportTemplate" type="file" style="width: 420px;" />
+                <span class="error-block"></span>
+            </div>
+        </div>
+          <div class="control-group">
+            <label class="control-label">上报模板：</label>
+            <div class="controls">
+                <input id="fillTemplate" class="input-file" name="fillTemplate" type="file" style="width: 420px;" />
+                <span class="error-block"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">表样名称：</label>
+            <div class="controls">
+                <input id="txtTableFileName" type="text" class="input-xlarge" style="width: 400px;" name="tableName" form-val="empty,maxlength(200)" val-empty-msg="表样名称不能为空!" val-maxlength-msg="您最多只能输入200个字。" msg-ctrl-id="txtErrorTableName" />
+                <span id="txtErrorTableName" class="error-block"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">上报类型：</label>
+            <div class="controls">
+                <label class="radio inline">
+                    <input type="radio" value="@RCS_TableType.Free" name="fillType" checked="checked"/>
+                    自由上报
+                </label>
+                <label class="radio inline">
+                    <input type="radio" value="@RCS_TableType.Cycle" name="fillType" />
+                    周期上报
+                </label>
+                <label class="radio inline">
+                    <input type="radio" value="@RCS_TableType.Temp" name="fillType" />
+                    临时上报
+                </label>
+            </div>
+        </div>
+        <div id="cycleContainer" class="control-group">
+            <label class="control-label"></label>
+            <div id="dvContainer" class="controls">
+                <select id="cycleType" name="@RCS_TableTypeExpand.CycleType" class="input-mini low">
+                    <option cycle-content="/Html/CycleWeek.html" value="@RCS_CycleType.Week" selected="selected">每周</option>
+                    <option cycle-content="/Html/CycleMonth.html" value="@RCS_CycleType.Month">每月</option>
+                    <option cycle-content="/Html/CycleQuarter.html" value="@RCS_CycleType.Quarter">每季度</option>
+                    <option cycle-content="/Html/CycleYear.html" value="@RCS_CycleType.Year">每年</option>
+                </select>
+            </div>
+        </div>
+        <div id="tempContainer" class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <input id="txtTempStart" name="@RCS_TableTypeExpand.TempStart" class="input-small low" type="text" readonly="readonly"/>
+                <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+                <input id="txtTempEnd" name="@RCS_TableTypeExpand.TempEnd" class="input-small low" type="text" readonly="readonly"/>
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">上报说明：</label>
+            <div class="controls">
+                <textarea name="descript" form-val="maxlength(1000)" style="width: 400px; height: 100px" msg-ctrl-id="txtFillDescript" val-maxlength-msg="您最多只能输入1000个字。"></textarea>
+                <span id="txtFillDescript" class="error-block"></span>
+            </div>
+        </div>
+    </fieldset>
+</form>

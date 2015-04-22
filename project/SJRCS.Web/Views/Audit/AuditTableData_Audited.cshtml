@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Audit/AuditTableData.cshtml";
+}
+@model PagedList<Dynamic>
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="300">名称
+            </th>
+            <th width="60">提交人
+            </th>
+            <th width="120">提交时间
+            </th>
+             <th width="120">审核时间
+            </th>
+            <th>操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr>
+                <td><span title=" @item.NAME" form-val="textwarp"> @item.NAME</span></td>
+                <td>@item.REPORTER_NAME</td>
+                <td>@item.REPORT_TIME</td>
+                <td>@item.AUDIT_TIME</td>
+                <td auditid="@item.ID">
+                     <button class="btn btn-mini" title="查看已审核的数据" operate="view_audited"><i class="icon-search"></i> 查看</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

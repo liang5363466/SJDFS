@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Report/ReportTableData.cshtml";
+}
+@model PagedList<Dynamic>
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="300">名称
+            </th>
+            <th width="120">上报时间
+            </th>
+            <th width="60">上报人
+            </th>
+            <th width="120">审核时间
+            </th>
+            <th width="60">审核人
+            </th>
+            <th>审核意见
+            </th>
+            <th width="180">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (dynamic item in Model)
+        {
+            <tr>
+                <td>
+                     <span title="@item.NAME" form-val="textwarp"> @item.NAME</span>
+                </td>
+                <td>@item.REPORT_TIME</td>
+                <td>@item.REPORTER_NAME</td>
+                <td>@item.AUDIT_TIME</td>
+                <td>@item.AUDITOR_NAME</td>
+                <td>
+                    <span title="@item.OPINION" form-val="textwarp">@item.OPINION</span>
+                </td>
+                <td auditid="@item.ID">
+                    <button class="btn btn-mini" title="再次提交给管理审核" operate="commit"><i class="icon-envelope"></i> 提交</button>
+                    <button class="btn btn-mini" title="修改未提交的数据" operate="edit"><i class="icon-edit"></i> 修改</button>
+                    <button class="btn btn-mini" title="删除未提交的数据" operate="delete"><i class="icon-remove"></i> 删除</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ShowPageIndexBox = false, ShowGoButton = false, CssClass = "data_pager" })
+            </td>
+        </tr>
+    </tfoot>
+</table>

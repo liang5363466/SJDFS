@@ -1,0 +1,35 @@
+﻿<script>
+    $("#cycleWeekStart").change(function () {
+        var islessThan = parseInt($(this).val()) <= parseInt($("#cycleWeekEnd").val());
+        if (!islessThan) {
+            alert("必须小于结束时间!");
+            $(this).children().first().attr({ "selected": "selected" });
+        }
+    });
+    $("#cycleWeekEnd").change(function () {
+        var ismoreThan = parseInt($(this).val()) >= parseInt($("#cycleWeekStart").val());
+        if (!ismoreThan) {
+            alert("必须大于开始时间!");
+            $(this).children().last().attr({ "selected": "selected" });
+        }
+    });
+</script>
+<select id="cycleWeekStart" name="CycleWeekStart" class="input-mini low">
+    <option value="1">周一</option>
+    <option value="2">周二</option>
+    <option value="3">周三</option>
+    <option value="4">周四</option>
+    <option value="5">周五</option>
+    <option value="6">周六</option>
+    <option value="7">周日</option>
+</select>
+<span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+<select id="cycleWeekEnd" name="CycleWeekEnd" class="input-mini low">
+    <option value="1">周一</option>
+    <option value="2">周二</option>
+    <option value="3">周三</option>
+    <option value="4">周四</option>
+    <option value="5">周五</option>
+    <option value="6">周六</option>
+    <option value="7">周日</option>
+</select>

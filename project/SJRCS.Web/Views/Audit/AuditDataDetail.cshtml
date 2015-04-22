@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <script src="/Scripts/Audit/AuditDataDetail.js"></script>
+}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12" style="overflow-x: hidden; overflow-y: hidden">
+            <object
+                id="excelContainer"
+                name="excelContainer"
+                classid="clsid:E77E049B-23FC-4DB8-B756-60529A35FAD5"
+                codebase="/Plugins/WebOffice.cab#Version=6,0,5,0">
+                <param name="_ExtentX" value="800" />
+                <param name="_ExtentY" value="600" />
+            </object> 
+             <script event="NotifyToolBarClick(cmd)" for="excelContainer">
+                 webOfficeControl_NotifyToolBarClick(cmd);
+            </script>
+        </div>
+    </div>
+</div>

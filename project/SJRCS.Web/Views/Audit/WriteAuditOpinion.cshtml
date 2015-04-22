@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Head{<base target="_self" /> }
+@section Script{<script src="/Scripts/Audit/WriteAuditOpinion.js"></script>}
+<form action="/Audit/WriteAuditOpinion?auditId=@Request["auditId"]" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <br />
+        <div class="control-group">
+            <label class="control-label">审核意见：</label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="opinion" form-val="maxlength(1000)" style="width:380px;height:100px" msg-ctrl-id="txtOpinionError" val-maxlength-msg="您最多只能输入1000个字。">@Model.OPINION</textarea>
+                </div>
+                <span class="error-block" id="txtOpinionError"></span>
+            </div>
+        </div>
+          <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button id="btnSubmit" type="submit" class="btn btn-primary">确定</button>
+                <button id="btnCancel" type="button"  class="btn btn-primary">取消</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

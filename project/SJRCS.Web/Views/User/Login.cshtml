@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+<form action="/User/Login" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <div class="control-group">
+            <p class="help-block"></p>
+        </div>
+        <div class="control-group">
+            <p class="help-block"></p>
+        </div>
+        <div class="control-group">
+            <label class="control-label">用户选择</label>
+            <div class="controls">
+                <select class="input-xlarge" name="userid">
+                    <option value="C23BAD755FD05E50E040200A6D005D9B">吕键</option>
+                    <option value="C3D4FBC2C7521574E040200A6D005BDE">刘建国</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button id="btnNext" type="submit" class="btn btn-primary">登录</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

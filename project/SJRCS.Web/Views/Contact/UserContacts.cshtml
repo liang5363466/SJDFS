@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+     <script src="/Scripts/Contact/UserContacts.js"></script>
+}
+<div class="operate">
+    <a href="/User/OrgUsers?tableId=@Request["tableId"]" class="button button-flat-primary button-small">未设置</a>
+    丨
+    <a href="/User/ReportUsers?tableId=@Request["tableId"]" class="button button-flat-primary button-small">已设置</a>
+    丨
+   <a href="#" style="color:red" class="button button-flat-primary button-small">常用联系人</a>
+</div>
+<table  class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>姓名
+            </th>
+            <th width="80">操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (dynamic item in Model)
+       {
+           <tr>
+               <td>@item.DISPLAY_NAME
+               </td>
+                <td contactid="@item.USER_ID">
+                    @if (!item.ISSET)
+                    {
+                        <button id="btnAdd@(item.USER_ID)" data-loading-text="正在添加..." class="btn btn-mini" operate="set"><i class="icon-ok"></i> 添加</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-mini disabled" disabled="disabled"><i class="icon-ok"></i> 添加</button>
+                    }
+               </td>
+           </tr>
+       }
+    </tbody>
+</table>

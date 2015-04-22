@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "出错啦";
+    dynamic errorObj = ViewData["Error"];
+}
+ <script>window.top.jQuery.unblockUI();</script>
+<h2>程序异常</h2>
+控制器: @errorObj.RouteData.GetRequiredString("controller")<br />
+方法: @errorObj.RouteData.GetRequiredString("action")<br />
+异常消息: @errorObj.Exception.Message<br />
+调用堆栈: @errorObj.Exception.StackTrace
+<p>对不起，程序内部错误。

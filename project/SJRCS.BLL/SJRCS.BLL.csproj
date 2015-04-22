@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49C4A681-5C0A-4523-B161-E8F2735E6A65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SJRCS.BLL</RootNamespace>
+    <AssemblyName>SJRCS.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CycleStrategy\CycleFill.cs" />
+    <Compile Include="CycleStrategy\CycleMonthFill.cs" />
+    <Compile Include="CycleStrategy\CycleQuarterFill.cs" />
+    <Compile Include="CycleStrategy\CycleWeekFill.cs" />
+    <Compile Include="CycleStrategy\CycleYearFill.cs" />
+    <Compile Include="Infrastructure\BaseBLL.cs" />
+    <Compile Include="Interface\IRCS_DataAuditsBLL.cs" />
+    <Compile Include="Interface\IRCS_OrgInfoBLL.cs" />
+    <Compile Include="Interface\IRCS_FillRulesBLL.cs" />
+    <Compile Include="Interface\IRCS_TablesBLL.cs" />
+    <Compile Include="Interface\IRCS_UserBLL.cs" />
+    <Compile Include="Interface\IRCS_DataTableBLL.cs" />
+    <Compile Include="Interface\IRCS_AuthorsBLL.cs" />
+    <Compile Include="Interface\IRCS_ContactsBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RCS_ContactsBLL.cs" />
+    <Compile Include="RCS_DataAuditsBLL.cs" />
+    <Compile Include="RCS_DataTableBLL.cs" />
+    <Compile Include="RCS_OrgInfoBLL.cs" />
+    <Compile Include="RCS_TablesBLL.cs" />
+    <Compile Include="RCS_UserBLL.cs" />
+    <Compile Include="RCS_FillRulesBLL.cs" />
+    <Compile Include="RCS_AuthorsBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SJRCS.Common\SJRCS.Common.csproj">
+      <Project>{8ba7e961-9a1c-4671-8217-4e1e6e0a3465}</Project>
+      <Name>SJRCS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.DALProfile\SJRCS.DALProfile.csproj">
+      <Project>{d963e7b1-987f-435f-9933-974d8a818167}</Project>
+      <Name>SJRCS.DALProfile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.DAL\SJRCS.DAL.csproj">
+      <Project>{290f1870-aa30-465e-ab6f-bc5d8b78234c}</Project>
+      <Name>SJRCS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Model\SJRCS.Model.csproj">
+      <Project>{b8a69430-4421-426c-92e8-468aa1d34d30}</Project>
+      <Name>SJRCS.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

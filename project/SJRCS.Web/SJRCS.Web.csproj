@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{845048F3-C7D6-4F91-9D42-553286CA2697}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SJRCS.Web</RootNamespace>
+    <AssemblyName>SJRCS.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\lib\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\..\lib\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPager">
+      <HintPath>..\packages\MvcPager.MVC4.CN.2.0.0.1\lib\MvcPager.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BaseController.cs" />
+    <Compile Include="Common\BootStrapper.cs" />
+    <Compile Include="Common\ViewUtils.cs" />
+    <Compile Include="Controllers\AuditController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\OrgController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TableController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\SessionFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="ErrorPage\404.html" />
+    <Content Include="Content\Css\Content.css" />
+    <Content Include="Content\Css\Main.css" />
+    <Content Include="Content\Images\contenttitle.gif" />
+    <Content Include="Content\Images\logo.gif" />
+    <Content Include="Content\Images\menu_bg_01.gif" />
+    <Content Include="Content\Images\menu_dot.gif" />
+    <Content Include="Content\Images\menu_dot1.gif" />
+    <Content Include="Content\Images\menu_dot_21.gif" />
+    <Content Include="Content\Images\navidot.gif" />
+    <Content Include="Content\Images\org_icon.gif" />
+    <Content Include="Content\Images\reght_1_bg_1.gif" />
+    <Content Include="Content\Images\SysIcon\add.gif" />
+    <Content Include="Content\Images\SysIcon\addclass.gif" />
+    <Content Include="Content\Images\SysIcon\addnews.gif" />
+    <Content Include="Content\Images\SysIcon\addpage.gif" />
+    <Content Include="Content\Images\SysIcon\allexport.gif" />
+    <Content Include="Content\Images\SysIcon\assign.gif" />
+    <Content Include="Content\Images\SysIcon\auditop.gif" />
+    <Content Include="Content\Images\SysIcon\bak.gif" />
+    <Content Include="Content\Images\SysIcon\batchexport.gif" />
+    <Content Include="Content\Images\SysIcon\clear.gif" />
+    <Content Include="Content\Images\SysIcon\comm.gif" />
+    <Content Include="Content\Images\SysIcon\delete.gif" />
+    <Content Include="Content\Images\SysIcon\download.gif" />
+    <Content Include="Content\Images\SysIcon\edit.gif" />
+    <Content Include="Content\Images\SysIcon\editname.gif" />
+    <Content Include="Content\Images\SysIcon\editonline.gif" />
+    <Content Include="Content\Images\SysIcon\edittxt.gif" />
+    <Content Include="Content\Images\SysIcon\enter.gif" />
+    <Content Include="Content\Images\SysIcon\export.gif" />
+    <Content Include="Content\Images\SysIcon\filldata.gif" />
+    <Content Include="Content\Images\SysIcon\filldetail.gif" />
+    <Content Include="Content\Images\SysIcon\importdata.gif" />
+    <Content Include="Content\Images\SysIcon\js.gif" />
+    <Content Include="Content\Images\SysIcon\lock.gif" />
+    <Content Include="Content\Images\SysIcon\offen.gif" />
+    <Content Include="Content\Images\SysIcon\option.gif" />
+    <Content Include="Content\Images\SysIcon\out.gif" />
+    <Content Include="Content\Images\SysIcon\part.gif" />
+    <Content Include="Content\Images\SysIcon\pbsh.gif" />
+    <Content Include="Content\Images\SysIcon\preview.gif" />
+    <Content Include="Content\Images\SysIcon\publish.gif" />
+    <Content Include="Content\Images\SysIcon\remove.gif" />
+    <Content Include="Content\Images\SysIcon\remove1.gif" />
+    <Content Include="Content\Images\SysIcon\replay.gif" />
+    <Content Include="Content\Images\SysIcon\review.gif" />
+    <Content Include="Content\Images\SysIcon\review1.gif" />
+    <Content Include="Content\Images\SysIcon\role.gif" />
+    <Content Include="Content\Images\SysIcon\roleset.gif" />
+    <Content Include="Content\Images\SysIcon\set.gif" />
+    <Content Include="Content\Images\SysIcon\start.gif" />
+    <Content Include="Content\Images\SysIcon\stop.gif" />
+    <Content Include="Content\Images\SysIcon\submit.gif" />
+    <Content Include="Content\Images\SysIcon\TableDownload.gif" />
+    <Content Include="Content\Images\SysIcon\top.gif" />
+    <Content Include="Content\Images\SysIcon\unlock.gif" />
+    <Content Include="Content\Images\SysIcon\untop.gif" />
+    <Content Include="Content\Images\SysIcon\viewdata.gif" />
+    <Content Include="Content\Images\SysIcon\viewdetail.gif" />
+    <Content Include="Content\Images\tbg.gif" />
+    <Content Include="ErrorPage\SessionOut.html" />
+    <Content Include="Global.asax" />
+    <Content Include="Html\CycleMonth.html" />
+    <Content Include="Html\CycleQuarter.html" />
+    <Content Include="Html\CycleYear.html" />
+    <Content Include="Plugins\WebOffice.cab" />
+    <Content Include="Scripts\Audit\AuditDataDetail.js" />
+    <Content Include="Scripts\Audit\AuditTableData.js" />
+    <Content Include="Scripts\Audit\AuditTables.js" />
+    <Content Include="Scripts\Audit\SelectExportMode.js" />
+    <Content Include="Scripts\Audit\WriteAuditOpinion.js" />
+    <Content Include="Plugins\blockUI\jquery.blockUI.js" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-google.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-ie6.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap.css" />
+    <Content Include="Plugins\bootstrap\css\ie.css" />
+    <Content Include="Plugins\bootstrap\img\glyphicons-halflings-8.png" />
+    <Content Include="Plugins\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Plugins\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-affix.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-alert.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-button.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-carousel.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-collapse.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-dropdown.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-ie.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-modal.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-popover.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-scrollspy.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-tab.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-tooltip.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-transition.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap-typeahead.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Plugins\common\Common.js" />
+    <Content Include="Plugins\common\html5.js" />
+    <Content Include="Plugins\common\jquery.js" />
+    <Content Include="Scripts\Contact\Contacts.js" />
+    <Content Include="Scripts\Contact\DeptUsers.js" />
+    <Content Include="Scripts\Contact\Main.js" />
+    <Content Include="Scripts\Contact\UserContacts.js" />
+    <Content Include="Plugins\datepicker\calendar.js" />
+    <Content Include="Plugins\datepicker\lang\en.js" />
+    <Content Include="Plugins\datepicker\lang\zh-cn.js" />
+    <Content Include="Plugins\datepicker\lang\zh-tw.js" />
+    <Content Include="Plugins\datepicker\skin\datePicker.gif" />
+    <Content Include="Plugins\datepicker\skin\default\datepicker.css" />
+    <Content Include="Plugins\datepicker\skin\default\img.gif" />
+    <Content Include="Plugins\datepicker\skin\WdatePicker.css" />
+    <Content Include="Plugins\datepicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Plugins\datepicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Plugins\datepicker\skin\whyGreen\img.gif" />
+    <Content Include="Plugins\datepicker\WdatePicker.js" />
+    <Content Include="Scripts\Report\DataImport.js" />
+    <Content Include="Scripts\Report\EditReportData.js" />
+    <Content Include="Scripts\Report\FillTable.js" />
+    <Content Include="Scripts\Report\ReporterTables.js" />
+    <Content Include="Scripts\Report\ReportTableData.js" />
+    <Content Include="Scripts\Report\ViewAuditedData.js" />
+    <Content Include="Scripts\Report\ViewReportData.js" />
+    <Content Include="Scripts\Report\WriteReportDataName.js" />
+    <Content Include="Scripts\Table\EditTable.js" />
+    <Content Include="Scripts\Table\TableView.js" />
+    <Content Include="Scripts\Table\TableUpload.js" />
+    <Content Include="Scripts\Table\UploaderTables.js" />
+    <Content Include="Scripts\Shared\ContentLayout.js" />
+    <Content Include="Scripts\Shared\MainLayout.js" />
+    <Content Include="Html\CycleWeek.html" />
+    <Content Include="Scripts\Table\SetTableHeads.js" />
+    <Content Include="Scripts\User\OrgUsers.js" />
+    <Content Include="Scripts\Table\SetTableRule.js" />
+    <Content Include="Scripts\User\ReportUsers.js" />
+    <Content Include="Plugins\zTree\css\zTreeStyle.css" />
+    <Content Include="Plugins\zTree\css\img\dept_icon.png" />
+    <Content Include="Plugins\zTree\css\img\diy\1_close.png" />
+    <Content Include="Plugins\zTree\css\img\diy\1_open.png" />
+    <Content Include="Plugins\zTree\css\img\diy\2.png" />
+    <Content Include="Plugins\zTree\css\img\diy\3.png" />
+    <Content Include="Plugins\zTree\css\img\diy\4.png" />
+    <Content Include="Plugins\zTree\css\img\diy\5.png" />
+    <Content Include="Plugins\zTree\css\img\diy\6.png" />
+    <Content Include="Plugins\zTree\css\img\diy\7.png" />
+    <Content Include="Plugins\zTree\css\img\diy\8.png" />
+    <Content Include="Plugins\zTree\css\img\diy\9.png" />
+    <Content Include="Plugins\zTree\css\img\line_conn.gif" />
+    <Content Include="Plugins\zTree\css\img\loading.gif" />
+    <Content Include="Plugins\zTree\css\img\zTreeStandard.gif" />
+    <Content Include="Plugins\zTree\css\img\zTreeStandard.png" />
+    <Content Include="Plugins\zTree\js\jquery-1.4.4.min.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.all-3.5.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.core-3.5.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.core-3.5.min.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.excheck-3.5.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.excheck-3.5.min.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.exedit-3.5.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.exedit-3.5.min.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.exhide-3.5.js" />
+    <Content Include="Plugins\zTree\js\jquery.ztree.exhide-3.5.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SJRCS.BLL\SJRCS.BLL.csproj">
+      <Project>{49c4a681-5c0a-4523-b161-e8f2735e6a65}</Project>
+      <Name>SJRCS.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Common\SJRCS.Common.csproj">
+      <Project>{8ba7e961-9a1c-4671-8217-4e1e6e0a3465}</Project>
+      <Name>SJRCS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.DALProfile\SJRCS.DALProfile.csproj">
+      <Project>{d963e7b1-987f-435f-9933-974d8a818167}</Project>
+      <Name>SJRCS.DALProfile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.DAL\SJRCS.DAL.csproj">
+      <Project>{290f1870-aa30-465e-ab6f-bc5d8b78234c}</Project>
+      <Name>SJRCS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Excel\SJRCS.Excel.csproj">
+      <Project>{793fe24b-533e-472c-b7f3-995be35c9777}</Project>
+      <Name>SJRCS.Excel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Model\SJRCS.Model.csproj">
+      <Project>{b8a69430-4421-426c-92e8-468aa1d34d30}</Project>
+      <Name>SJRCS.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\SysIcon\sysicon_x2.psd" />
+    <Content Include="Content\Images\SysIcon\sysicon_x4.psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Main.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\UploaderTables.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReporterTables.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ContentLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\TableUpload.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Plugins\bootstrap\less-ie6\accordion.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\alerts.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\bootstrap-ie6.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\breadcrumbs.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\button-groups.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\buttons.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\carousel.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\close.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\code.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\component-animations.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\dropdowns.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\forms.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\grid.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\hero-unit.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\labels-badges.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\layouts.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\media.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\mixins.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\modals.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\navbar.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\navs.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\pager.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\pagination.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\popovers.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\progress-bars.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\reset.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive-1200px-min.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive-767px-max.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive-768px-979px.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive-navbar.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive-utilities.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\responsive.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\scaffolding.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\sprites.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\tables.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\thumbnails.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\tooltip.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\type.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\utilities.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\variables.less" />
+    <Content Include="Plugins\bootstrap\less-ie6\wells.less" />
+    <Content Include="Plugins\bootstrap\less\accordion.less" />
+    <Content Include="Plugins\bootstrap\less\alerts.less" />
+    <Content Include="Plugins\bootstrap\less\bootstrap.less" />
+    <Content Include="Plugins\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Plugins\bootstrap\less\button-groups.less" />
+    <Content Include="Plugins\bootstrap\less\buttons.less" />
+    <Content Include="Plugins\bootstrap\less\carousel.less" />
+    <Content Include="Plugins\bootstrap\less\close.less" />
+    <Content Include="Plugins\bootstrap\less\code.less" />
+    <Content Include="Plugins\bootstrap\less\component-animations.less" />
+    <Content Include="Plugins\bootstrap\less\dropdowns.less" />
+    <Content Include="Plugins\bootstrap\less\forms.less" />
+    <Content Include="Plugins\bootstrap\less\grid.less" />
+    <Content Include="Plugins\bootstrap\less\hero-unit.less" />
+    <Content Include="Plugins\bootstrap\less\labels-badges.less" />
+    <Content Include="Plugins\bootstrap\less\layouts.less" />
+    <Content Include="Plugins\bootstrap\less\media.less" />
+    <Content Include="Plugins\bootstrap\less\mixins.less" />
+    <Content Include="Plugins\bootstrap\less\modals.less" />
+    <Content Include="Plugins\bootstrap\less\navbar.less" />
+    <Content Include="Plugins\bootstrap\less\navs.less" />
+    <Content Include="Plugins\bootstrap\less\pager.less" />
+    <Content Include="Plugins\bootstrap\less\pagination.less" />
+    <Content Include="Plugins\bootstrap\less\popovers.less" />
+    <Content Include="Plugins\bootstrap\less\progress-bars.less" />
+    <Content Include="Plugins\bootstrap\less\reset.less" />
+    <Content Include="Plugins\bootstrap\less\responsive-1200px-min.less" />
+    <Content Include="Plugins\bootstrap\less\responsive-767px-max.less" />
+    <Content Include="Plugins\bootstrap\less\responsive-768px-979px.less" />
+    <Content Include="Plugins\bootstrap\less\responsive-navbar.less" />
+    <Content Include="Plugins\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Plugins\bootstrap\less\responsive.less" />
+    <Content Include="Plugins\bootstrap\less\scaffolding.less" />
+    <Content Include="Plugins\bootstrap\less\sprites.less" />
+    <Content Include="Plugins\bootstrap\less\tables.less" />
+    <Content Include="Plugins\bootstrap\less\thumbnails.less" />
+    <Content Include="Plugins\bootstrap\less\tooltip.less" />
+    <Content Include="Plugins\bootstrap\less\type.less" />
+    <Content Include="Plugins\bootstrap\less\utilities.less" />
+    <Content Include="Plugins\bootstrap\less\variables.less" />
+    <Content Include="Plugins\bootstrap\less\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\SetTableHeads.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\SetTableRule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\OrgUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ReportUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\TableView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Table\EditTable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportTableData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\DataImport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ViewReportData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\EditReportData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\FillTable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\TableFillDescript.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Audit\AuditTables.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Audit\AuditTableData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Audit\AuditDataDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportTableData_UnCommit.cshtml" />
+    <Content Include="Views\Report\ReportTableData_UnAudit.cshtml" />
+    <Content Include="Views\Report\ReportTableData_Audited.cshtml" />
+    <Content Include="Views\Report\ReportTableData_UnPass.cshtml" />
+    <Content Include="Views\Report\ViewAuitedData.cshtml" />
+    <Content Include="Views\Audit\WriteAuditOpinion.cshtml" />
+    <Content Include="Views\Audit\AuditTableData_UnAudit.cshtml" />
+    <Content Include="Views\Audit\AuditTableData_Audited.cshtml" />
+    <Content Include="Views\Audit\AuditTableData_UnPass.cshtml" />
+    <Content Include="Views\Report\WriteReportDataName.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contact\OrgUsers.cshtml" />
+    <Content Include="Views\Contact\Main.cshtml" />
+    <Content Include="Views\Contact\Contacts.cshtml" />
+    <Content Include="Views\Contact\UserContacts.cshtml" />
+    <Content Include="Views\Audit\SelectExportMode.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\PublishConfig.pubxml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>10924</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2645/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

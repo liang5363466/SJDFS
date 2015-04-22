@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <style>
+        table .input_text {
+            padding:0px 0px 0px 4px;
+            margin-bottom:0px;
+            height:20px;
+            line-height:20px;
+            width:100px;
+        }
+    </style>    
+    <script src="/Scripts/Table/SetTableHeads.js"></script>
+}
+<form id="setHeadForm" action="/Table/SetTableHeads" method="post">
+    <table class="table table-condensed table-bordered table-striped">
+        <thead>
+             <tr style="background:#ffffff">
+                <td width="120">表格代码：</td>
+                <td>
+                    <input type="text" name="dtName" value="@Utils.GenerateDataTableName()" style="width:200px" class="input_text" form-val="empty,maxlength(200)" val-empty-msg="表格代码不能为空。" val-maxlength-msg="您最多只能输入200个字。" msg-ctrl-id="dtName_Error"/>
+                    <span id="dtName_Error" style="color:red"></span>
+                </td>
+            </tr>
+            <tr>
+                <td width="120">表头名
+                </td>
+                <td>代码
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (dynamic headItem in Model)
+            {
+                <tr>
+                    <td width="120">@headItem.Name：</td>
+                    <td>
+                        <input type="text" name="@headItem.UniqueCode" value="@headItem.Code" class="input_text" form-val="empty,maxlength(200)" val-empty-msg="@string.Format("{0}字段代码不能为空！",headItem.Name)" val-maxlength-msg="您最多只能输入200个字。" msg-ctrl-id="@headItem.UniqueCode"/>
+                        <span id="@headItem.UniqueCode" style="color:red"></span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+  
+</form>

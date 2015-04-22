@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+}
+@section Script{
+    <script src="/Plugins/datepicker/WdatePicker.js"></script>
+    <script src="/Scripts/Audit/SelectExportMode.js"></script>
+}
+<form action="/Audit/DataExport" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">导出文件名：</label>
+            <input type="hidden" name="tableId" id="hidTableId" value="@Model.ID"/>
+            <div class="controls">
+                <input 
+                    id="txtExportFileName" 
+                    type="text" 
+                    class="input-text" 
+                    name="exportFileName" 
+                    style="width:380px" 
+                    value="@Model.NAME" 
+                    form-val="empty,maxlength(200)" 
+                    val-empty-msg="文件导出名称不能为空!" 
+                    val-maxlength-msg="您最多只能输入200个字。" 
+                    msg-ctrl-id="txtExportFileNameError" />
+                <span class="error-block" id="txtExportFileNameError"></span>
+            </div>
+        </div>
+         <div class="control-group">
+            <label class="control-label">区间选择：</label>
+            <div class="controls">
+                <input id="txtExportStart" name="startDate" class="Wdate" style="width:162px"  type="text" readonly="readonly" />
+                <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+                <input id="txtExportEnd" name="endDate"  class="Wdate" style="width:162px" type="text" readonly="readonly" />
+            </div>
+        </div>
+    </fieldset>
+</form>
