@@ -5,10 +5,6 @@ $(function () {
         Dialog.close();
     });
     Dialog.button("下一步").click(function () {
-        if ($("#exportTemplate").val().length == 0) {
-            $("#exportTemplate + .error-block").text("请选择导出模板");
-            return false;
-        }
         if ($("#fillTemplate").val().length == 0) {
             $("#fillTemplate + .error-block").text("请选择上报模板");
             return false;
@@ -54,16 +50,6 @@ $(function () {
         });
     });
 
-    $("#exportTemplate").change(function () {
-        $(this).next(".error-block").text("");
-        $("#txtErrorTableName").text("");
-        var strFileName = $(this).val().replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi, "$1");
-        $("#txtTableFileName").val(strFileName).trigger("focus").trigger("blur");
-        formIsError = !/^[a-zA-Z]:(\\.+)(.xls|.XLS)$/.test($(this).val());
-        if (formIsError) {
-            $(this).next(".error-block").text("您选择的模板有误，请选择格式为.xls的Excel文件。");
-        }
-    });
     $("#fillTemplate").change(function () {
         $(this).next(".error-block").text("");
         var strFileName = $(this).val().replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi, "$1");

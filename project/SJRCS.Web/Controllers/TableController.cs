@@ -12,6 +12,8 @@ using System.Web.Routing;
 using SJRCS.Model;
 using System.IO;
 using SJRCS.Excel;
+using System.Diagnostics;
+using Shell32;
 namespace SJRCS.Web.Controllers
 {
     public class TableController : BaseController
@@ -46,37 +48,44 @@ namespace SJRCS.Web.Controllers
         [HttpPost]
         public ActionResult TableUpload()
         {
-            //将表样放入临时文件夹，以供分析表头
-            HttpPostedFileBase exportTemplate = Request.Files["exportTemplate"] as HttpPostedFileBase;
-            string exportFileName = Utils.NewGuid() + ".xls";
-            string exportSavePath = Const.FillTemp + exportFileName;
-            exportTemplate.SaveAs(exportSavePath);
-            //上报模板
+            //读取上报模板信息，并保存至上报模板文件夹
             HttpPostedFileBase fillTemplate = Request.Files["fillTemplate"] as HttpPostedFileBase;
             string fillFileName = Utils.NewGuid() + ".xls";
             string fillSavePath = Const.FillTemplate + fillFileName;
-            //表样实体属性设置
-            dynamic tableInfo = new Dynamic();
-            AnalyseTableStruct analyse = new AnalyseTableStruct();
-            analyse.AnalyseTableStrut(tableInfo, exportSavePath);
-            tableInfo.UpLoader = SessionUser.UserId;
-            tableInfo.Type = int.Parse(Request["fillType"]);
-            tableInfo.ExportFileName = exportFileName;
-            tableInfo.ExportFile = exportTemplate;
+            fillTemplate.SaveAs(fillSavePath);
 
-            tableInfo.FillFile = fillTemplate;
-            tableInfo.FillFileName = fillFileName;
-            tableInfo.FillFilePath = fillSavePath;
-            tableInfo.Name = Request["tableName"];
-            tableInfo.CreateTime = DateTime.Now;
-            tableInfo.IsPublished = RCS_IsPublished.False;
-            tableInfo.IsAllowReport = RCS_IsPublished.False;
-            tableInfo.Descript = string.IsNullOrEmpty(Request["descript"]) ? "" : Request["descript"];
-            tableInfo.CycleFields = new List<Dynamic>();
-            if (tableInfo.Type == RCS_TableType.Cycle) DoCycleTypeSave(tableInfo);
-            else if (tableInfo.Type == RCS_TableType.Temp) DoTempTypeSave(tableInfo);
-            TempData["UploadTable"] = tableInfo;
-            return View("SetTableHeads", tableInfo.HeadCollection);
+
+
+            ShellClass sh = new ShellClass();
+            Folder dir = sh.NameSpace(Path.GetDirectoryName(fillSavePath));
+            FolderItem item = dir.ParseName(Path.GetFileName(fillSavePath));
+            for (int i = 0; i < 30; i++)
+            {
+                string det = dir.GetDetailsOf(item, i);
+           
+            }
+            ////表样实体属性设置
+            //dynamic tableInfo = new Dynamic();
+            //tableInfo.UpLoader = SessionUser.UserId;
+            //tableInfo.Type = int.Parse(Request["fillType"]);
+            //tableInfo.FillFile = fillTemplate;
+            //tableInfo.FillFileName = fillFileName;
+            //tableInfo.FillFilePath = fillSavePath;
+            //tableInfo.Name = Request["tableName"];
+            //tableInfo.CreateTime = DateTime.Now;
+            //tableInfo.IsPublished = RCS_IsPublished.False;
+            //tableInfo.IsAllowReport = RCS_IsPublished.False;
+            //tableInfo.Version = RCS_TableVersion.New;
+            //tableInfo.Descript = string.IsNullOrEmpty(Request["descript"]) ? "" : Request["descript"];
+            //tableInfo.CycleFields = new List<Dynamic>();
+
+
+            //if (tableInfo.Type == RCS_TableType.Cycle) 
+            //    DoCycleTypeSave(tableInfo);
+            //else if (tableInfo.Type == RCS_TableType.Temp) 
+            //    DoTempTypeSave(tableInfo);
+
+            return View("TableUpload");
         }
 
         public ActionResult SetTableHeads()

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TableInfo Name="卫生处理质量安全分析统计报表五">
+  <Columns>
+    <Column>抽查消毒药物名称</Column>
+    <Column>消毒对象</Column>
+    <Column>抽查数量（次）</Column>
+    <Column>抽查合格数量（次）</Column>
+    <Column>合格率（%）</Column>
+  </Columns>
+</TableInfo>

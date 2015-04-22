@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TableInfo Name="卫生处理质量安全分析统计报表二">
+  <Columns>
+    <Column>处理对象</Column>
+    <Column>卫生处理原因(依据/指证)</Column>
+    <Column>签发卫生处理通知书(份)</Column>
+    <Column>消毒</Column>
+    <Column>除鼠</Column>
+    <Column>除虫</Column>
+    <Column>其他</Column>
+    <Column>处理数量</Column>
+  </Columns>
+</TableInfo>

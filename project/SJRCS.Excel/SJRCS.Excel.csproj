@@ -69,13 +69,21 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalyseAuditedDetail.cs" />
-    <Compile Include="AnalyseDataExport.cs" />
-    <Compile Include="AnalyseExcel.cs" />
-    <Compile Include="AnalyseImportFile.cs" />
-    <Compile Include="AnalyseTableStruct.cs" />
-    <Compile Include="AutomaticOrgName.cs" />
+    <Compile Include="Interface\ITable_SJDFS.cs" />
+    <Compile Include="old\AnalyseAuditedDetail.cs" />
+    <Compile Include="old\AnalyseDataExport.cs" />
+    <Compile Include="old\AnalyseExcel.cs" />
+    <Compile Include="old\AnalyseImportFile.cs" />
+    <Compile Include="old\AnalyseTableStruct.cs" />
+    <Compile Include="old\AutomaticOrgName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table_SJDFS_000001.cs" />
+    <Compile Include="Table_SJDFS_000002.cs" />
+    <Compile Include="Table_SJDFS_000003.cs" />
+    <Compile Include="Table_SJDFS_000004.cs" />
+    <Compile Include="Table_SJDFS_000005.cs" />
+    <Compile Include="Table_SJDFS_000006.cs" />
+    <Compile Include="Table_SJDFS_000007.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SJRCS.Common\SJRCS.Common.csproj">
@@ -83,6 +91,7 @@
       <Name>SJRCS.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
