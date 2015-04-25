@@ -179,13 +179,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Config\Table_SJDFS_000001.xml" />
-    <Content Include="Config\Table_SJDFS_000002.xml" />
-    <Content Include="Config\Table_SJDFS_000003.xml" />
-    <Content Include="Config\Table_SJDFS_000004.xml" />
-    <Content Include="Config\Table_SJDFS_000005.xml" />
-    <Content Include="Config\Table_SJDFS_000006.xml" />
-    <Content Include="Config\Table_SJDFS_000007.xml" />
     <Content Include="ErrorPage\404.html" />
     <Content Include="Content\Css\Content.css" />
     <Content Include="Content\Css\Main.css" />

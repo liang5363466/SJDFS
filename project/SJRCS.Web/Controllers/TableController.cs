@@ -14,6 +14,7 @@ using System.IO;
 using SJRCS.Excel;
 using System.Diagnostics;
 using Shell32;
+using System.Reflection;
 namespace SJRCS.Web.Controllers
 {
     public class TableController : BaseController
@@ -53,62 +54,43 @@ namespace SJRCS.Web.Controllers
             string fillFileName = Utils.NewGuid() + ".xls";
             string fillSavePath = Const.FillTemplate + fillFileName;
             fillTemplate.SaveAs(fillSavePath);
-
-
-
+            ////表样实体属性设置
+            dynamic tableInfo = new Dynamic();
             ShellClass sh = new ShellClass();
             Folder dir = sh.NameSpace(Path.GetDirectoryName(fillSavePath));
             FolderItem item = dir.ParseName(Path.GetFileName(fillSavePath));
             for (int i = 0; i < 30; i++)
             {
                 string det = dir.GetDetailsOf(item, i);
-           
+                if (det.StartsWith("Table_SJDFS_"))
+                {
+                    tableInfo.UniqueCode = det;
+                    break;
+                }
             }
-            ////表样实体属性设置
-            //dynamic tableInfo = new Dynamic();
-            //tableInfo.UpLoader = SessionUser.UserId;
-            //tableInfo.Type = int.Parse(Request["fillType"]);
-            //tableInfo.FillFile = fillTemplate;
-            //tableInfo.FillFileName = fillFileName;
-            //tableInfo.FillFilePath = fillSavePath;
-            //tableInfo.Name = Request["tableName"];
-            //tableInfo.CreateTime = DateTime.Now;
-            //tableInfo.IsPublished = RCS_IsPublished.False;
-            //tableInfo.IsAllowReport = RCS_IsPublished.False;
-            //tableInfo.Version = RCS_TableVersion.New;
-            //tableInfo.Descript = string.IsNullOrEmpty(Request["descript"]) ? "" : Request["descript"];
-            //tableInfo.CycleFields = new List<Dynamic>();
+            tableInfo.UpLoader = SessionUser.UserId;
+            tableInfo.Type = int.Parse(Request["fillType"]);
+            tableInfo.FillFile = fillTemplate;
+            tableInfo.FillFileName = fillFileName;
+            tableInfo.FillFilePath = fillSavePath;
+            tableInfo.Name = Request["tableName"];
+            tableInfo.CreateTime = DateTime.Now;
+            tableInfo.IsPublished = RCS_IsPublished.False;
+            tableInfo.IsAllowReport = RCS_IsPublished.False;
+            tableInfo.Version = RCS_TableVersion.New;
+            tableInfo.Descript = Request["descript"] ?? "";
+            tableInfo.CycleFields = new List<Dynamic>();
 
+            if (tableInfo.Type == RCS_TableType.Cycle)
+                DoCycleTypeSave(tableInfo);
+            else if (tableInfo.Type == RCS_TableType.Temp)
+                DoTempTypeSave(tableInfo);
+            //从配置文件中获取表头信息
+            ITable_SJDFS tableAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UniqueCode);
+            tableInfo.HeadCollection = tableAnalyse.GetTableHeadInfos();
 
-            //if (tableInfo.Type == RCS_TableType.Cycle) 
-            //    DoCycleTypeSave(tableInfo);
-            //else if (tableInfo.Type == RCS_TableType.Temp) 
-            //    DoTempTypeSave(tableInfo);
-
-            return View("TableUpload");
-        }
-
-        public ActionResult SetTableHeads()
-        {
-            //保存导出模板至模板文件夹
-            dynamic tableInfo = TempData["UploadTable"] as Dynamic;
-            HttpPostedFileBase exportFile = tableInfo.ExportFile as HttpPostedFileBase;
-            string exportSavePath = Const.ExportTemplate + tableInfo.ExportFileName;
-            exportFile.SaveAs(exportSavePath);
-            //保存上报模板至上报文件夹
-            HttpPostedFileBase fillFile = tableInfo.FillFile as HttpPostedFileBase;
-            fillFile.SaveAs(tableInfo.FillFilePath);
-            tableInfo.DataTable = Request["dtName"];
-            foreach (dynamic headItem in tableInfo.HeadCollection)
-            {
-                headItem.Code = Request[headItem.UniqueCode];
-            }
             bll.AddTable(tableInfo);
-            ViewBag.ReturnScript =
-            @"window.top.jQuery.unblockUI();
-            Dialog.returnValue = true;
-            Dialog.close();";
-            return View("SetTableHeads", tableInfo.HeadCollection);
+            return View("TableUpload");
         }
 
         public ActionResult DownLoadTable(long tableId)

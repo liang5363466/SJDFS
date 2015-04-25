@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using SJRCS.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace SJRCS.Excel
 {
     public interface ITable_SJDFS
     {
+
+        /// <summary>
+        /// 获取表头信息
+        /// </summary>
+        /// <returns></returns>
+        ICollection<Dynamic> GetTableHeadInfos();
+
         /// <summary>
         /// 分析用户在线填报的数据
         /// </summary>
