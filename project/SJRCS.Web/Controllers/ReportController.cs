@@ -11,6 +11,9 @@ using SJRCS.Common;
 using Webdiyer.WebControls.Mvc;
 using SJRCS.Model;
 using SJRCS.Excel;
+using System.Reflection;
+using Shell32;
+using System.IO;
 namespace SJRCS.Web.Controllers
 {
     public class ReportController : BaseController
@@ -19,14 +22,45 @@ namespace SJRCS.Web.Controllers
         private IRCS_DataAuditsBLL auditBll = BootStrapper.AutofacContainer.Resolve<IRCS_DataAuditsBLL>();
         private IRCS_DataTableBLL dataTableBll = BootStrapper.AutofacContainer.Resolve<IRCS_DataTableBLL>();
 
+        public ActionResult ViewReportData()
+        {
+            return View();
+        }
 
+        public ActionResult EditReportData()
+        {
+            return View();
+        }
+
+        public ActionResult FillTable()
+        {
+            return View();
+        }
+
+        public ActionResult ViewAuitedData()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 初始化表样在线上报
+        /// </summary>
         public ActionResult GetFillTemplate(long tableId)
         {
             dynamic tableInfo = bll.GetTableByTableId(tableId);
-           
             string filePath = Const.FillTemplate + tableInfo.FILL_FILE;
-            AutomaticOrgName autoOrgName = new AutomaticOrgName();
-            filePath = autoOrgName.AutoFill(filePath, SessionUser.OrgName);
+            if(tableInfo.VERSION == RCS_TableVersion.New)
+            {
+               
+                ITable_SJDFS tableAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UNIQUE_CODE);
+                filePath = tableAnalyse.InitializeFillTable(tableInfo, SessionUser);
+            }
+            else
+            {
+                AutomaticOrgName autoOrgName = new AutomaticOrgName();
+                filePath = autoOrgName.AutoFill(filePath, SessionUser.OrgName);
+            }
+                
             System.IO.FileStream fs = null;
             byte[] data = null;
             try
@@ -47,6 +81,9 @@ namespace SJRCS.Web.Controllers
             return File(data, "application/vnd.ms-excel", tableInfo.NAME + ".xls");
         }
 
+        /// <summary>
+        /// 外部已有数据Excel在线数据导入
+        /// </summary>
         public ActionResult DataImport()
         {
             HttpPostedFileBase excelFile = Request.Files["importfile"] as HttpPostedFileBase;
@@ -57,9 +94,28 @@ namespace SJRCS.Web.Controllers
                 long tableId = long.Parse(Request["tableId"]);
                 dynamic tableInfo = bll.GetTableByTableId(tableId);
                 string tableFilePath = Const.ExportTemplate + tableInfo.EXPORT_FILE;
+                int checkResult = 0;
                 excelFile.SaveAs(importSavePath);
-                AnalyseImportFile analyseImportFile = new AnalyseImportFile();
-                int checkResult = analyseImportFile.CheckImportFileStrut(importSavePath, tableFilePath, tableInfo.HeadCollection);
+                if (tableInfo.VERSION == RCS_TableVersion.Old)
+                {
+                    AnalyseImportFile analyseImportFile = new AnalyseImportFile();
+                    checkResult = analyseImportFile.CheckImportFileStrut(importSavePath, tableFilePath, tableInfo.HeadCollection);
+                }
+                else 
+                {
+                    ShellClass sh = new ShellClass();
+                    Folder dir = sh.NameSpace(Path.GetDirectoryName(importSavePath));
+                    FolderItem item = dir.ParseName(Path.GetFileName(importSavePath));
+                    for (int i = 0; i < 30; i++)
+                    {
+                        string det = dir.GetDetailsOf(item, i);
+                        if (det.StartsWith("Table_SJDFS_"))
+                        {
+                            checkResult = tableInfo.UNIQUE_CODE.ToString() == det ? 1 : 0;
+                            break;
+                        }
+                    }
+                }
                 if (checkResult == 1)
                 {
                     string tempFileName = Utils.NewGuid() + ".xls";
@@ -87,6 +143,9 @@ namespace SJRCS.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取用户需要上报的表样集合
+        /// </summary>
         public ActionResult ReporterTables(int pageIndex = 1)
         {
             int pageCount, recordCount;
@@ -95,6 +154,9 @@ namespace SJRCS.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 获取某张表样，当前用户上报的所有数据条目
+        /// </summary>
         public ActionResult ReportTableData(long tableId, int status = 0, int pageIndex = 1)
         {
             ViewBag.Data = bll.GetTableByTableId(tableId);
@@ -111,20 +173,15 @@ namespace SJRCS.Web.Controllers
             else if (status == RCS_AuditStatus.UnPass)
                 return View("ReportTableData_UnPass", model);
 
-
             return View(model);
         }
 
-        public ActionResult ViewReportData()
-        {
-            return View();
-        }
+        
 
-        public ActionResult EditReportData()
-        {
-            return View();
-        }
 
+        /// <summary>
+        /// 根据数据批次id获取某条审核的表样数据
+        /// </summary>
         public ActionResult GetReportFile(long auditId)
         {
             dynamic auditInfo = auditBll.GetAuditDataDetail(auditId);
@@ -148,6 +205,9 @@ namespace SJRCS.Web.Controllers
             return File(data, "application/vnd.ms-excel", auditInfo.EXPORT_FILE);
         }
 
+        /// <summary>
+        /// 临时保存表样上报数据
+        /// </summary>
         public ActionResult TempSave()
         {
             HttpPostedFileBase excelFile = Request.Files["tempfile"] as HttpPostedFileBase;
@@ -179,6 +239,9 @@ namespace SJRCS.Web.Controllers
             return Content("success");
         }
 
+        /// <summary>
+        /// 获取表样上报说明
+        /// </summary>
         public ActionResult TableFillDescript(long tableId)
         {
             dynamic tableInfo = bll.GetTableByTableId(tableId);
@@ -186,47 +249,34 @@ namespace SJRCS.Web.Controllers
             return View();
         }
 
-        public ActionResult FillTable()
-        {
-            return View();
-        }
-
+        /// <summary>
+        /// 预览已经审核过的数据
+        /// </summary>
         public ActionResult GetAuditedDataFile(long tableId, long auditId)
         {
             dynamic tableInfo = bll.GetTableByTableId(tableId);
+            string auditFile = null;
             int dataStartX = Convert.ToInt32(tableInfo.DATA_STARTX);
             int dataStartY = Convert.ToInt32(tableInfo.DATA_STARTY);
             string fillTemplate = Const.FillTemplate + tableInfo.FILL_FILE;
             dynamic auditInfo = auditBll.GetAuditDataDetail(auditId);
             IEnumerable<Dynamic> auditDatas = auditBll.GetAuditedData(auditId);
-            AnalyseAuditedDetail analyse = new AnalyseAuditedDetail();
-            string auditFile = analyse.GenerateAuditedDetail(dataStartX, dataStartY, fillTemplate, tableInfo.HeadCollection, auditDatas);
+            if (tableInfo.VERSION == RCS_TableVersion.Old)
+            {
+                AnalyseAuditedDetail analyse = new AnalyseAuditedDetail();
+                auditFile = analyse.GenerateAuditedDetail(dataStartX, dataStartY, fillTemplate, tableInfo.HeadCollection, auditDatas);
+            }
+            else 
+            {
+                ITable_SJDFS tableAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UNIQUE_CODE);
+                auditFile = tableAnalyse.PreviewAuditedData(tableInfo.HeadCollection, auditDatas, fillTemplate);
+            }
+
             if (!string.IsNullOrEmpty(auditFile))
             {
-                System.IO.FileStream fs = null;
-                byte[] data = null;
-                try
-                {
-                    fs = System.IO.File.OpenRead(auditFile);
-                    data = new byte[fs.Length];
-                    fs.Read(data, 0, data.Length);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    if (fs != null) fs.Close();
-                    System.IO.File.Delete(auditFile);
-                }
+                byte[] data = GetServerFileBytes(auditFile, true);
                 return File(data, "application/vnd.ms-excel");
             }
-            return View();
-        }
-
-        public ActionResult ViewAuitedData()
-        {
             return View();
         }
 

@@ -48,6 +48,7 @@
     <Compile Include="Enum\RCS_TableTypeExpand.cs" />
     <Compile Include="Enum\RCS_IsInCycle.cs" />
     <Compile Include="Enum\RCS_TableVersion.cs" />
+    <Compile Include="HeadInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enum\RCS_TableType.cs" />
     <Compile Include="Enum\RCS_HeadDataType.cs" />

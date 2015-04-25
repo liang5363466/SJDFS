@@ -90,6 +90,10 @@
       <Project>{8ba7e961-9a1c-4671-8217-4e1e6e0a3465}</Project>
       <Name>SJRCS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Model\SJRCS.Model.csproj">
+      <Project>{b8a69430-4421-426c-92e8-468aa1d34d30}</Project>
+      <Name>SJRCS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

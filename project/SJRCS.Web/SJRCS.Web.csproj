@@ -311,7 +311,6 @@
     <Content Include="Scripts\Shared\ContentLayout.js" />
     <Content Include="Scripts\Shared\MainLayout.js" />
     <Content Include="Html\CycleWeek.html" />
-    <Content Include="Scripts\Table\SetTableHeads.js" />
     <Content Include="Scripts\User\OrgUsers.js" />
     <Content Include="Scripts\Table\SetTableRule.js" />
     <Content Include="Scripts\User\ReportUsers.js" />
@@ -489,9 +488,6 @@
     <Content Include="Plugins\bootstrap\less\utilities.less" />
     <Content Include="Plugins\bootstrap\less\variables.less" />
     <Content Include="Plugins\bootstrap\less\wells.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Table\SetTableHeads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Table\SetTableRule.cshtml" />

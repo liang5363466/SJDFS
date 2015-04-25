@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SJRCS.Model;
 
 namespace SJRCS.Excel
 {
@@ -16,25 +17,25 @@ namespace SJRCS.Excel
         /// <returns></returns>
         ICollection<Dynamic> GetTableHeadInfos();
 
+
+        /// <summary>
+        /// 初始化表格填报，主要设置一些初始化填写的字段
+        /// </summary>
+        string InitializeFillTable(dynamic tableInfo, SessionUser user);
+
         /// <summary>
         /// 分析用户在线填报的数据
         /// </summary>
-        /// <param name="filePath">文件上传保存的路径</param>
-        /// <returns>数据表格</returns>
-        DataTable AnalyseOlFillData(string filePath);
-
-        /// <summary>
-        /// 外部填写好的Excel数据导入处理
-        /// </summary>
-        /// <param name="filePath">文件上传保存的路径</param>
-        /// <returns>数据表格</returns>
-        DataTable ExcelDataImport(string filePath);
+        IEnumerable<Dynamic> AnalyseOlFillData(long auditId,ICollection<Dynamic> heads, string filePath);
 
         /// <summary>
         /// 汇总导出的数据
         /// </summary>
-        /// <param name="data">数据表格</param>
-        /// <returns>汇总数据服务器保存路径</returns>
-        string ExportSummaryData(DataTable data);
+        void ExportSummaryData(IEnumerable<Dynamic> heads, IEnumerable<Dynamic> data, string fillTemplate,string exportPath);
+
+        /// <summary>
+        /// 预览已经审核过的数据
+        /// </summary>
+        string PreviewAuditedData(IEnumerable<Dynamic> heads, IEnumerable<Dynamic> datas, string templatePath);
     }
 }

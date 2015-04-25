@@ -22,13 +22,6 @@ namespace SJRCS.Web.Controllers
         private IRCS_TablesBLL bll = BootStrapper.AutofacContainer.Resolve<IRCS_TablesBLL>();
         private IRCS_UserBLL userBll = BootStrapper.AutofacContainer.Resolve<IRCS_UserBLL>();
 
-        public ActionResult UploaderTables(int pageIndex = 1)
-        {
-            int pageCount, recordCount;
-            IEnumerable<Dynamic> adminTables = bll.GetAdminTablesByUploaderId(pageIndex, 10, out pageCount, out recordCount, SessionUser.UserId);
-            var model = new PagedList<Dynamic>(adminTables, pageIndex, 10, recordCount);
-            return View(model);
-        }
 
         public ActionResult InitUpload()
         {
@@ -39,26 +32,59 @@ namespace SJRCS.Web.Controllers
         {
             return View();
         }
-        
+
+
+        public ActionResult TableView(long tableId)
+        {
+            return View();
+        }
+
+        public ActionResult EditTable(long tableId)
+        {
+            dynamic tableInfo = bll.GetTableByTableId(tableId);
+            return View(tableInfo);
+        }
+
+        /// <summary>
+        /// 获取当前用户上传的的所有表样
+        /// </summary>
+        public ActionResult UploaderTables(int pageIndex = 1)
+        {
+            int pageCount, recordCount;
+            IEnumerable<Dynamic> adminTables = bll.GetAdminTablesByUploaderId(pageIndex, 10, out pageCount, out recordCount, SessionUser.UserId);
+            var model = new PagedList<Dynamic>(adminTables, pageIndex, 10, recordCount);
+            return View(model);
+        }
+        /// <summary>
+        /// 删除一个表样
+        /// </summary>
         public ActionResult DeleteOneTable(long tableId, int pageIndex = 1)
         {
             bll.DeleteTableByTableId(tableId);
             return RedirectToAction("UploaderTables", "Table", new { pageIndex = pageIndex });
         }
 
+        /// <summary>
+        /// 表样上传入库处理
+        /// </summary>
         [HttpPost]
         public ActionResult TableUpload()
         {
             //读取上报模板信息，并保存至上报模板文件夹
             HttpPostedFileBase fillTemplate = Request.Files["fillTemplate"] as HttpPostedFileBase;
-            string fillFileName = Utils.NewGuid() + ".xls";
-            string fillSavePath = Const.FillTemplate + fillFileName;
-            fillTemplate.SaveAs(fillSavePath);
+            string tableName = Utils.NewGuid() + ".xls";
+            string fillTemplateSavePath = Const.FillTemplate + tableName;
+            fillTemplate.SaveAs(fillTemplateSavePath);
+            string exportTemplateSavePath = Const.ExportTemplate + tableName;
+            fillTemplate.SaveAs(exportTemplateSavePath);
+
             ////表样实体属性设置
             dynamic tableInfo = new Dynamic();
+            tableInfo.Name = Request["tableName"];
+
             ShellClass sh = new ShellClass();
-            Folder dir = sh.NameSpace(Path.GetDirectoryName(fillSavePath));
-            FolderItem item = dir.ParseName(Path.GetFileName(fillSavePath));
+            Folder dir = sh.NameSpace(Path.GetDirectoryName(fillTemplateSavePath));
+            FolderItem item = dir.ParseName(Path.GetFileName(fillTemplateSavePath));
             for (int i = 0; i < 30; i++)
             {
                 string det = dir.GetDetailsOf(item, i);
@@ -68,17 +94,21 @@ namespace SJRCS.Web.Controllers
                     break;
                 }
             }
+
+            tableInfo.ExportFile = tableName;
+            tableInfo.FillFile = tableName;
+            tableInfo.DataTable = Utils.GenerateDataTableName();
+            tableInfo.DataStartX = 0;
+            tableInfo.DataStartY = 0;
             tableInfo.UpLoader = SessionUser.UserId;
-            tableInfo.Type = int.Parse(Request["fillType"]);
-            tableInfo.FillFile = fillTemplate;
-            tableInfo.FillFileName = fillFileName;
-            tableInfo.FillFilePath = fillSavePath;
-            tableInfo.Name = Request["tableName"];
             tableInfo.CreateTime = DateTime.Now;
+            tableInfo.Descript = Request["descript"];
             tableInfo.IsPublished = RCS_IsPublished.False;
             tableInfo.IsAllowReport = RCS_IsPublished.False;
+            tableInfo.Type = int.Parse(Request["fillType"]);
+
             tableInfo.Version = RCS_TableVersion.New;
-            tableInfo.Descript = Request["descript"] ?? "";
+            
             tableInfo.CycleFields = new List<Dynamic>();
 
             if (tableInfo.Type == RCS_TableType.Cycle)
@@ -88,11 +118,15 @@ namespace SJRCS.Web.Controllers
             //从配置文件中获取表头信息
             ITable_SJDFS tableAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UniqueCode);
             tableInfo.HeadCollection = tableAnalyse.GetTableHeadInfos();
-
             bll.AddTable(tableInfo);
+
+            ViewBag.ReturnScript = @"window.top.jQuery.unblockUI();Dialog.returnValue = true;Dialog.close();";
             return View("TableUpload");
         }
 
+        /// <summary>
+        /// 下载指定id的表样
+        /// </summary>
         public ActionResult DownLoadTable(long tableId)
         { 
             dynamic tableInfo = bll.GetTableByTableId(tableId);
@@ -116,7 +150,10 @@ namespace SJRCS.Web.Controllers
             return File(data, "application/vnd.ms-excel", tableInfo.NAME+".xls");
         }
 
-        public ActionResult GetTableFile(long tableId)
+        /// <summary>
+        /// 在线预览上传的表样
+        /// </summary>
+        public ActionResult PreviewTable(long tableId)
         {
             dynamic tableInfo = bll.GetTableByTableId(tableId);
             string filePath = Const.ExportTemplate + tableInfo.EXPORT_FILE;
@@ -139,29 +176,29 @@ namespace SJRCS.Web.Controllers
             return File(data, "application/vnd.ms-excel", tableInfo.NAME+".xls");
         }
 
+        /// <summary>
+        /// 发布表样
+        /// </summary>
         public ActionResult PublishTable(long tableId, long pageIndex = 1)
         {
             bll.PublishTable(tableId);
             return RedirectToAction("UploaderTables", "Table", new { pageIndex = pageIndex });
         }
 
+        /// <summary>
+        /// 设置表样可以上报
+        /// </summary>
         public ActionResult SetTableIsAllowReport(long tableId,int status,long pageIndex = 1)
         {
             bll.UpdateTableStatus(tableId, status);
             return RedirectToAction("UploaderTables", "Table", new { pageIndex = pageIndex });
         }
 
-        public ActionResult TableView(long tableId)
-        {
-            return View();
-        }
 
-        public ActionResult EditTable(long tableId)
-        {
-            dynamic tableInfo = bll.GetTableByTableId(tableId);
-            return View(tableInfo);
-        }
 
+        /// <summary>
+        /// 保存修改后的上报表样信息
+        /// </summary>
         public ActionResult SaveTableChange(long tableId)
         {
             dynamic tableInfo = bll.GetTableByTableId(tableId);
@@ -169,10 +206,12 @@ namespace SJRCS.Web.Controllers
             tableInfo.NAME = Request["tableName"];
             tableInfo.IS_PUBLISHED = RCS_IsPublished.False;
             tableInfo.IS_ALLOW_REPORT = RCS_IsPublished.False;
-            tableInfo.DESCRIPT = string.IsNullOrEmpty(Request["descript"]) ? "" : Request["descript"];
+            tableInfo.DESCRIPT = Request["descript"];
             tableInfo.CycleFields = new List<Dynamic>();
-            if (tableInfo.TYPE == RCS_TableType.Cycle) DoCycleTypeSave(tableInfo);
-            else if (tableInfo.TYPE == RCS_TableType.Temp) DoTempTypeSave(tableInfo);
+            if (tableInfo.TYPE == RCS_TableType.Cycle) 
+                DoCycleTypeSave(tableInfo);
+            else if (tableInfo.TYPE == RCS_TableType.Temp) 
+                DoTempTypeSave(tableInfo);
             TempData["EditTable"] = tableInfo;
             bll.UpdateTable(tableInfo);
             ViewBag.ReturnScript = "Dialog.returnValue = true;Dialog.close();";
@@ -180,12 +219,18 @@ namespace SJRCS.Web.Controllers
             return View("EditTable", tableInfo);
         }
 
+        /// <summary>
+        /// 检查表样是否已设置上报人员
+        /// </summary>
         public ActionResult CheckTableIsSetFillUser(long tableId)
         {
             IEnumerable<dynamic> fillUsers =  userBll.GetFillUsers(tableId);
             return fillUsers.Count() > 0 ? Content("1") : Content("0");
         }
 
+        /// <summary>
+        /// 检测表样名称是否已存在
+        /// </summary>
         public ActionResult CheckTableNameIsExist(long tableId,string tableName)
         {
             bool checkResult = bll.CheckTableNameIsExist(tableId,tableName);

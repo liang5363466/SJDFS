@@ -12,7 +12,7 @@
         var topWidth = $("#ifrMain", $(window.top.document)).width();
         var topHeight = $("#ifrMain", $(window.top.document)).height();
         $("#excelContainer").width(topWidth).height(topHeight);
-        var gotoUrl = Site.Host+"/Table/GetTableFile?tableId=" + Request.queryString("tableId");
+        var gotoUrl = Site.Host+"/Table/PreviewTable?tableId=" + Request.queryString("tableId");
         webOffice.LoadOriginalFile(gotoUrl, "xls");
         window.top.jQuery.unblockUI();
     } catch (e) {

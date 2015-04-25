@@ -33,7 +33,7 @@ namespace SJRCS.DAL
         public IEnumerable<Dynamic> GetTablesByUploaderId(int pageIndex, int pageSize, out int pageCount, out int recordCount, string uploaderId)
         {
             string allFields = string.Format(
-                @"a.Id,a.Name,a.UpLoader,a.Create_Time,a.Is_Published,a.Is_Allow_Report,a.Is_InCycle,a.Type
+                @"a.Id,a.Name,a.UpLoader,a.Create_Time,a.Is_Published,a.Is_Allow_Report,a.Is_InCycle,a.Type,a.Version,a.Unique_Code
                 ,(Select Count(b.ID) From Rcs_DataAudits b Where b.Status = {0} And b.Table_Id = a.Id) as UnAudit
                 ,(Select Count(b.ID) From Rcs_DataAudits b Where b.Status = {1} And b.Table_Id = a.Id) as Audited"
             , RCS_AuditStatus.UnAudit,RCS_AuditStatus.Audited);
@@ -68,7 +68,7 @@ namespace SJRCS.DAL
         public IEnumerable<Dynamic> GetAuditorTables(int pageIndex, int pageSize, out int pageCount, out int recordCount, string auditorId)
         {
             string allFields = string.Format(
-                @"a.Id,a.Name,a.UpLoader,a.Create_Time,a.Is_Published,a.Type,a.Is_Allow_Report
+                @"a.Id,a.Name,a.UpLoader,a.Create_Time,a.Is_Published,a.Type,a.Is_Allow_Report,a.Version,a.Unique_Code
                 ,(Select Count(b.ID) From Rcs_DataAudits b Where b.Status = {0} And b.Table_Id = a.Id) as UnAudit
                 ,(Select Count(b.ID) From Rcs_DataAudits b Where b.Status = {1} And b.Table_Id = a.Id) as UnPass
                 ,(Select Count(b.ID) From Rcs_DataAudits b Where b.Status = {2} And b.Table_Id = a.Id) as Audited"
@@ -162,6 +162,8 @@ namespace SJRCS.DAL
                    ,Is_Allow_Report
                    ,IS_InCycle
                    ,Type
+                   ,Version
+                   ,Unique_Code
                 )
                 Values (
                     :Id
@@ -178,13 +180,15 @@ namespace SJRCS.DAL
                    ,:IsAllowReport
                    ,:IsInCycle
                    ,:Type
+                   ,:Version
+                   ,:UniqueCode
                 )";
                 tableObj.Id = GetNextId("RCS_Tables");
                 OracleParameter[] parameters = { 
                      new OracleParameter(":Id",tableObj.Id)
                     ,new OracleParameter(":Name",tableObj.Name)
-                    ,new OracleParameter(":ExportFile",tableObj.ExportFileName)      
-                    ,new OracleParameter(":FillFile",tableObj.FillFileName)  
+                    ,new OracleParameter(":ExportFile",tableObj.ExportFile)      
+                    ,new OracleParameter(":FillFile",tableObj.FillFile)  
                     ,new OracleParameter(":DataTable",tableObj.DataTable)                  
                     ,new OracleParameter(":DataStartX",tableObj.DataStartX)                
                     ,new OracleParameter(":DataStartY",tableObj.DataStartY)                
@@ -194,7 +198,9 @@ namespace SJRCS.DAL
                     ,new OracleParameter(":IsPublished",tableObj.IsPublished)              
                     ,new OracleParameter(":IsAllowReport",tableObj.IsAllowReport)
                     ,new OracleParameter(":IsInCycle",RCS_IsInCycle.True)
-                    ,new OracleParameter(":Type",tableObj.Type)  
+                    ,new OracleParameter(":Type",tableObj.Type) 
+                    ,new OracleParameter(":Version",tableObj.Version)
+                    ,new OracleParameter(":UniqueCode",tableObj.UniqueCode)
                 }; 
                 #endregion
 

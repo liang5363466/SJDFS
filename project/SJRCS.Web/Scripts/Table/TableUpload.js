@@ -56,6 +56,8 @@ $(function () {
         formIsError = !/^[a-zA-Z]:(\\.+)(.xls|.XLS)$/.test($(this).val());
         if (formIsError) {
             $(this).next(".error-block").text("您选择的模板有误，请选择格式为.xls的Excel文件。");
+        } else {
+            $('#txtTableFileName').val(strFileName);
         }
     });
 

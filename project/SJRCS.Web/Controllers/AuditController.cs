@@ -11,6 +11,7 @@ using SJRCS.Common;
 using Webdiyer.WebControls.Mvc;
 using SJRCS.Web.Filters;
 using SJRCS.Excel;
+using System.Reflection;
 namespace SJRCS.Web.Controllers
 {
     public class AuditController : BaseController
@@ -18,6 +19,13 @@ namespace SJRCS.Web.Controllers
         private IRCS_DataAuditsBLL bll = BootStrapper.AutofacContainer.Resolve<IRCS_DataAuditsBLL>();
         private IRCS_TablesBLL tableBll = BootStrapper.AutofacContainer.Resolve<IRCS_TablesBLL>();
 
+        public ActionResult AuditDataDetail()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 将在线填写好的数据入库，未审核状态
+        /// </summary>
         public ActionResult CommitAuditData()
         {
             long auditId = long.Parse(Request["auditId"]);
@@ -25,12 +33,18 @@ namespace SJRCS.Web.Controllers
             return RedirectToAction("ReportTableData", "Report", new { tableId = Request["tableId"], status = Request["status"], pageIndex = Request["pageIndex"] });
         }
        
+        /// <summary>
+        /// 删除一个未提交的数据
+        /// </summary>
         public ActionResult DeleteUnCommitData(long auditId)
         {
             bll.DeleteAuditData(auditId);
             return RedirectToAction("ReportTableData", "Report", new { tableId = Request["tableId"], status = Request["status"], pageIndex = string.IsNullOrEmpty(Request["pageIndex"]) ? "1" : Request["pageIndex"] });
         }
 
+        /// <summary>
+        /// 获取所有需要审核的,已提交审核的数据
+        /// </summary>
         public ActionResult AuditTables(int pageIndex = 1)
         {
             int pageCount, recordCount;
@@ -39,6 +53,9 @@ namespace SJRCS.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 根据表样id以及数据审核状态，获取相应数据
+        /// </summary>
         public ActionResult AuditTableData(long tableId,int pageIndex = 1, int status = -1)
         {
             ViewBag.Data = tableBll.GetTableByTableId(tableId);
@@ -55,55 +72,58 @@ namespace SJRCS.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 将一条提交的数据，审核通过并入库
+        /// </summary>
         public ActionResult PassAuditData(long auditId, long tableId, int pageIndex = 1, int status = -1)
         {
             dynamic tableInfo = tableBll.GetTableByTableId(tableId);
             dynamic auditInfo = bll.GetAuditDataDetail(auditId);
-            int dataStartX = Convert.ToInt32(tableInfo.DATA_STARTX);
-            int dataStartY = Convert.ToInt32(tableInfo.DATA_STARTY);
             string auditFilePath = Const.FillTemp + auditInfo.EXPORT_FILE;
-            IEnumerable<Dynamic> headCollection = tableInfo.HeadCollection;
-            AnalyseImportFile analyse = new AnalyseImportFile();
-            IEnumerable<Dynamic> dataCollection = analyse.GetTableData(dataStartX, dataStartY, auditFilePath, headCollection);
-            foreach (dynamic item in dataCollection) item.AuditId = auditId;
-            bool result = bll.PassAuditData(auditId, SessionUser.UserId, headCollection, dataCollection);
+            bool result = false;
+            if (tableInfo.VERSION == RCS_TableVersion.Old)
+            {
+                int dataStartX = Convert.ToInt32(tableInfo.DATA_STARTX);
+                int dataStartY = Convert.ToInt32(tableInfo.DATA_STARTY);
+                IEnumerable<Dynamic> headCollection = tableInfo.HeadCollection;
+                AnalyseImportFile analyse = new AnalyseImportFile();
+                IEnumerable<Dynamic> dataCollection = analyse.GetTableData(dataStartX, dataStartY, auditFilePath, headCollection);
+                foreach (dynamic item in dataCollection)
+                {
+                    item.AuditId = auditId;
+                }
+                result = bll.PassAuditData(auditId, SessionUser.UserId, headCollection, dataCollection);
+            }
+            else 
+            {
+                ITable_SJDFS dataAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UNIQUE_CODE);
+                IEnumerable<Dynamic> headCollection = tableInfo.HeadCollection;
+                IEnumerable<Dynamic> dataCollection = dataAnalyse.AnalyseOlFillData(auditId,tableInfo.HeadCollection, auditFilePath);
+                result = bll.PassAuditData(auditId, SessionUser.UserId, headCollection, dataCollection);
+            }
+            
             if (result) System.IO.File.Delete(auditFilePath);
             return RedirectToAction("AuditTableData", "Audit", new { tableId = tableId ,pageIndex = pageIndex,status = status});
         }
 
+        /// <summary>
+        /// 将一条提交的数据，审核不通过
+        /// </summary>
         public ActionResult UnPassAuditData(long auditId, long tableId, int pageIndex = 1, int status = -1)
         {
             bll.UnPassAuditData(auditId, SessionUser.UserId);
             return RedirectToAction("AuditTableData", "Audit", new { tableId = tableId, pageIndex = pageIndex, status = status });
         }
 
+        /// <summary>
+        /// 下载一条已审核过的数据
+        /// </summary>
         public ActionResult DownloadAuditData(long auditId)
         {
             dynamic auditInfo = bll.GetAuditDataDetail(auditId);
             string filePath = Const.FillTemp + auditInfo.EXPORT_FILE;
-        
-            System.IO.FileStream fs = null;
-            byte[] data = null;
-            try
-            {
-                fs = System.IO.File.OpenRead(filePath);
-                data = new byte[fs.Length];
-                fs.Read(data, 0, data.Length);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                if (fs != null) fs.Close();
-            } 
-            return File(data, "application/vnd.ms-excel", auditInfo.NAME+".xls");
-        }
-
-        public ActionResult AuditDataDetail()
-        {
-            return View();
+            byte[] fileBytes = GetServerFileBytes(filePath, false);
+            return File(fileBytes, "application/vnd.ms-excel", auditInfo.NAME + ".xls");
         }
 
         public ActionResult InitWriteOpinion(long auditId)
@@ -120,13 +140,16 @@ namespace SJRCS.Web.Controllers
             ViewBag.ReturnScript = "window.returnValue = 1;window.close();";
             return View(model);
         }
-
+        
         public ActionResult SelectExportMode(long id)
         {
             var model = tableBll.GetTableByTableId(id);
             return View(model);
         }
 
+        /// <summary>
+        /// 根据时间范围导出上报的数据
+        /// </summary>
         [HttpPost]
         public ActionResult DataExport(long tableId, string exportFileName, DateTime startDate, DateTime endDate)
         {
@@ -137,35 +160,32 @@ namespace SJRCS.Web.Controllers
             string tempExportName = Utils.NewGuid();
             string tableFilePath = Const.ExportTemplate + tableInfo.EXPORT_FILE;
             string exportFilePath = Const.ExportTemp + tempExportName + ".xls";
+            string fillTemplate = Const.FillTemplate + tableInfo.FILL_FILE;
             IEnumerable<Dynamic> exportData = tableBll.GetExportAuditedData(tableId, SessionUser.UserId, startDate, endDate);
-            AnalyseDataExport analyse = new AnalyseDataExport();
-            analyse.DataExport(tableFilePath, exportFilePath, dataStartX, dataStartY, tableInfo.HeadCollection, exportData);
-            TempData["ExportName"] = exportFileName;
+            if (tableInfo.VERSION == RCS_TableVersion.Old)
+            {
+                AnalyseDataExport analyse = new AnalyseDataExport();
+                analyse.DataExport(tableFilePath, exportFilePath, dataStartX, dataStartY, tableInfo.HeadCollection, exportData);
+            }
+            else 
+            {
+                ITable_SJDFS dataExport = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UNIQUE_CODE);
+                dataExport.ExportSummaryData(tableInfo.HeadCollection, exportData, fillTemplate, exportFilePath);
+            }
+            Session["ExportName"] = exportFileName;
             return Content(tempExportName);
         }
 
+        /// <summary>
+        /// 当选择完导出数据时间区间，关闭数据导出开窗后，获取服务器已导出好的数据文件，提供下载
+        /// </summary>
         public ActionResult GetExportFile(string fileName)
         {
-            string exportName = TempData["ExportName"].ToString();
+            string exportName = Session["ExportName"].ToString();
             string exportFilePath = Const.ExportTemp + fileName + ".xls";
-            System.IO.FileStream fs = null;
-            byte[] data = null;
-            try
-            {
-                fs = System.IO.File.OpenRead(exportFilePath);
-                data = new byte[fs.Length];
-                fs.Read(data, 0, data.Length);
-            }
-            catch (Exception e)
-            {
-                throw e; 
-            }
-            finally 
-            {
-                if (fs != null) fs.Close();
-                System.IO.File.Delete(exportFilePath);
-            }
-            return File(data, "application/vnd.ms-excel", exportName+".xls");
+            if (Session["ExportFile"] == null) 
+                Session["ExportFile"] = GetServerFileBytes(exportFilePath, true);
+            return File((byte[])Session["ExportFile"], "application/vnd.ms-excel", exportName + ".xls");
         }
     }
 }

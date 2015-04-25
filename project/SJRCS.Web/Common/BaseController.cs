@@ -76,5 +76,33 @@ namespace SJRCS.Web.Common
             }
         }
         #endregion
+
+        #region 子类控制器通用操作
+        protected byte[] GetServerFileBytes(string path, bool isDelete)
+        {
+            System.IO.FileStream fs = null;
+            byte[] data = null;
+            try
+            {
+                fs = System.IO.File.OpenRead(path);
+                data = new byte[fs.Length];
+                fs.Read(data, 0, data.Length);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (fs != null) 
+                    fs.Close();
+                if (isDelete)
+                    System.IO.File.Delete(path);
+                
+            }
+            return data;
+        }
+
+        #endregion
     }
 }
