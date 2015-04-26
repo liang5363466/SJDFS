@@ -47,18 +47,16 @@ namespace SJRCS.DAL
         {
             string allFields = string.Format(
                 @"b.Id,b.Name,b.Is_Published,b.Create_Time,b.Type,b.Is_Allow_Report
-                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {0} And c.Table_Id = a.Table_Id) as UnCommit
-                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {1} And c.Table_Id = a.Table_Id) as UnAudit
-                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {2} And c.Table_Id = a.Table_Id) as Audited
-                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {3} And c.Table_Id = a.Table_Id) as UnPass"
+                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {0} And c.Table_Id = a.Table_Id And c.Reporter = '#reporter#') as UnCommit
+                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {1} And c.Table_Id = a.Table_Id And c.Reporter = '#reporter#') as UnAudit
+                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {2} And c.Table_Id = a.Table_Id And c.Reporter = '#reporter#') as Audited
+                ,(Select Count(c.ID) From Rcs_DataAudits c Where c.Status = {3} And c.Table_Id = a.Table_Id And c.Reporter = '#reporter#') as UnPass"
             , RCS_AuditStatus.UnCommit, RCS_AuditStatus.UnAudit, RCS_AuditStatus.Audited, RCS_AuditStatus.UnPass);
+            allFields = allFields.Replace("#reporter#", writerId);
             string tableAndWhere = string.Format(
-                @"Rcs_FillRules a left join RCS_Tables b 
-                on a.Table_Id = b.Id 
-                Where b.Is_Published = {0} 
-                And b.Is_Allow_Report = {1} 
-                And b.Is_InCycle = {2} 
-                And a.Reporter = '{3}'"
+                @"Rcs_FillRules a left join RCS_Tables b on a.Table_Id = b.Id 
+                Where b.Is_Published = {0} And b.Is_Allow_Report = {1} 
+                And b.Is_InCycle = {2} And a.Reporter = '{3}'"
             , RCS_IsPublished.True, RCS_IsAllowReport.True,RCS_IsInCycle.True, writerId);
             string indexField = "b.Id";
             string orderByField = "Order by b.Create_Time desc";
@@ -233,7 +231,7 @@ namespace SJRCS.DAL
                 new OracleParameter(":tableId",tableId)                                
             };
             dynamic tableInfo = ExecuteObjects(CommandType.Text, sql, parameters, false).FirstOrDefault<Dynamic>();
-            sql = "Select * From RCS_TableHeads Where Table_Id = :tableId";
+            sql = "Select * From RCS_TableHeads Where Table_Id = :tableId order by id";
             tableInfo.HeadCollection = ExecuteObjects(CommandType.Text, sql, parameters, false);
             sql = string.Format("Select Code,Value From RCS_FieldExpands Where Data_PKey = {0}",tableId);
             tableInfo.CycleFields = ExecuteObjects(CommandType.Text, sql, null, true);

@@ -1,6 +1,6 @@
 ﻿$(function () {
     $("#btnUpload").click(function () {
-        Dialog.show("表样上传", "/Table/InitUpload", ["下一步", "取消"], 530, 350, function () {
+        Dialog.show("表样上传", "/Table/InitUpload", ["提交", "取消"], 530, 350, function () {
             var result = Dialog.returnValue == true;
             if (result) {
                 window.location.reload();

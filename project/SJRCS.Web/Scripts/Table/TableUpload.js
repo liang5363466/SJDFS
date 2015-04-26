@@ -1,10 +1,10 @@
 ﻿var formIsError = false;
 $(function () {
-    Dialog.setButtons(['下一步', '取消']);
+    Dialog.setButtons(['提交', '取消']);
     Dialog.button("取消").click(function () {
         Dialog.close();
     });
-    Dialog.button("下一步").click(function () {
+    Dialog.button("提交").click(function () {
         if ($("#fillTemplate").val().length == 0) {
             $("#fillTemplate + .error-block").text("请选择上报模板");
             return false;

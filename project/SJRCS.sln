@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Web", "SJRCS.Web\SJRCS.Web.csproj", "{845048F3-C7D6-4F91-9D42-553286CA2697}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.BLL", "SJRCS.BLL\SJRCS.BLL.csproj", "{49C4A681-5C0A-4523-B161-E8F2735E6A65}"
@@ -10,10 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Model", "SJRCS.Model\SJRCS.Model.csproj", "{B8A69430-4421-426C-92E8-468AA1D34D30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Common", "SJRCS.Common\SJRCS.Common.csproj", "{8BA7E961-9A1C-4671-8217-4E1E6E0A3465}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "单元测试", "单元测试", "{D8B45F90-8E9E-4CE5-92DC-6E69CB6E843E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.DAL.Tests", "SJRCS.DAL.Tests\SJRCS.DAL.Tests.csproj", "{F1F411FA-60E5-42BE-BD16-FCB0EEC13141}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.DALProfile", "SJRCS.DALProfile\SJRCS.DALProfile.csproj", "{D963E7B1-987F-435F-9933-974D8A818167}"
 EndProject
@@ -28,19 +26,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "需求文档", "需求文�
 		..\documents\需求文档\详细设计.doc = ..\documents\需求文档\详细设计.doc
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Web.Tests", "SJRCS.Web.Tests\SJRCS.Web.Tests.csproj", "{15160003-1980-480D-A3FB-80B01668FAEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Excel", "SJRCS.Excel\SJRCS.Excel.csproj", "{793FE24B-533E-472C-B7F3-995BE35C9777}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "测试表样", "测试表样", "{CA5134C5-F54F-464D-A2D5-AD16CF8570CD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "表样文件", "表样文件", "{FA652885-3E23-4235-A777-5B8CD304E0BC}"
 	ProjectSection(SolutionItems) = preProject
-		..\documents\测试表样\出入境货物检验检疫横向对比情况统计表_上报模板.xls = ..\documents\测试表样\出入境货物检验检疫横向对比情况统计表_上报模板.xls
-		..\documents\测试表样\出入境货物检验检疫横向对比情况统计表_导出模板.xls = ..\documents\测试表样\出入境货物检验检疫横向对比情况统计表_导出模板.xls
-		..\documents\测试表样\江苏地区台湾海峡两岸直航检疫情况统计表_上报模板.xls = ..\documents\测试表样\江苏地区台湾海峡两岸直航检疫情况统计表_上报模板.xls
-		..\documents\测试表样\江苏地区台湾海峡两岸直航检疫情况统计表_导出模板.xls = ..\documents\测试表样\江苏地区台湾海峡两岸直航检疫情况统计表_导出模板.xls
-		..\documents\测试表样\江苏省各地市进出口额统计表_上报模板.xls = ..\documents\测试表样\江苏省各地市进出口额统计表_上报模板.xls
-		..\documents\测试表样\江苏省各地市进出口额统计表_导出模板.xls = ..\documents\测试表样\江苏省各地市进出口额统计表_导出模板.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表一.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表一.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表三.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表三.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表二.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表二.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表五.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表五.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表六.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表六.xls
+		..\documents\表样文件\卫生处理质量安全分析统计报表四.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表四.xls
+		..\documents\表样文件\媒介生物报表.xls = ..\documents\表样文件\媒介生物报表.xls
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Excel", "SJRCS.Excel\SJRCS.Excel.csproj", "{793FE24B-533E-472C-B7F3-995BE35C9777}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "修改记录", "修改记录", "{4FD1440B-C7F1-41E4-8D8E-ED90D94714BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2015-04-20修改", "2015-04-20修改", "{A50CE62F-9E4A-43EE-809B-61E457BDD7F5}"
+	ProjectSection(SolutionItems) = preProject
+		..\documents\修改记录\2015-04-20修改\修改需求及工作量估算.docx = ..\documents\修改记录\2015-04-20修改\修改需求及工作量估算.docx
+		..\documents\修改记录\2015-04-20修改\表样集合_不带数据.xls = ..\documents\修改记录\2015-04-20修改\表样集合_不带数据.xls
+		..\documents\修改记录\2015-04-20修改\表样集合_带数据.xls = ..\documents\修改记录\2015-04-20修改\表样集合_带数据.xls
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,18 +74,10 @@ Global
 		{8BA7E961-9A1C-4671-8217-4E1E6E0A3465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BA7E961-9A1C-4671-8217-4E1E6E0A3465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BA7E961-9A1C-4671-8217-4E1E6E0A3465}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1F411FA-60E5-42BE-BD16-FCB0EEC13141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1F411FA-60E5-42BE-BD16-FCB0EEC13141}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1F411FA-60E5-42BE-BD16-FCB0EEC13141}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1F411FA-60E5-42BE-BD16-FCB0EEC13141}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D963E7B1-987F-435F-9933-974D8A818167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D963E7B1-987F-435F-9933-974D8A818167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D963E7B1-987F-435F-9933-974D8A818167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D963E7B1-987F-435F-9933-974D8A818167}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15160003-1980-480D-A3FB-80B01668FAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15160003-1980-480D-A3FB-80B01668FAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15160003-1980-480D-A3FB-80B01668FAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15160003-1980-480D-A3FB-80B01668FAEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{793FE24B-533E-472C-B7F3-995BE35C9777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{793FE24B-533E-472C-B7F3-995BE35C9777}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{793FE24B-533E-472C-B7F3-995BE35C9777}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -89,7 +87,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F1F411FA-60E5-42BE-BD16-FCB0EEC13141} = {D8B45F90-8E9E-4CE5-92DC-6E69CB6E843E}
-		{15160003-1980-480D-A3FB-80B01668FAEC} = {D8B45F90-8E9E-4CE5-92DC-6E69CB6E843E}
+		{A50CE62F-9E4A-43EE-809B-61E457BDD7F5} = {4FD1440B-C7F1-41E4-8D8E-ED90D94714BB}
 	EndGlobalSection
 EndGlobal
