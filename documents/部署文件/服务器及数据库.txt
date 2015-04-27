@@ -1,0 +1,12 @@
+部署服务器：
+10.32.7.151
+administrator
+jyjy
+
+数据库
+SJDFS_DB  
+10.32.7.162/ORCL  SJDFS    1
+JYJYDW_DB 
+10.32.7.162/ORCL  JYJYDW    JYJYDW
+JSDM_DB
+10.32.7.162/ORCL  JSDM      JSDM
