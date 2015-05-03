@@ -15,59 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Common", "SJRCS.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.DALProfile", "SJRCS.DALProfile\SJRCS.DALProfile.csproj", "{D963E7B1-987F-435F-9933-974D8A818167}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "需求文档", "需求文档", "{4AE2318E-4A1F-4990-8AE0-2B644E6FC247}"
-	ProjectSection(SolutionItems) = preProject
-		..\documents\需求文档\CreateTable.sql = ..\documents\需求文档\CreateTable.sql
-		..\documents\需求文档\ER模型图.pdm = ..\documents\需求文档\ER模型图.pdm
-		..\documents\需求文档\原型设计.rp = ..\documents\需求文档\原型设计.rp
-		..\documents\需求文档\服务器资料.txt = ..\documents\需求文档\服务器资料.txt
-		..\documents\需求文档\概要设计.doc = ..\documents\需求文档\概要设计.doc
-		..\documents\需求文档\表样设置信息.txt = ..\documents\需求文档\表样设置信息.txt
-		..\documents\需求文档\详细设计.doc = ..\documents\需求文档\详细设计.doc
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRCS.Excel", "SJRCS.Excel\SJRCS.Excel.csproj", "{793FE24B-533E-472C-B7F3-995BE35C9777}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "表样文件", "表样文件", "{FA652885-3E23-4235-A777-5B8CD304E0BC}"
-	ProjectSection(SolutionItems) = preProject
-		..\documents\表样文件\一般原产地证明书签证情况（按机构）统计表.xls = ..\documents\表样文件\一般原产地证明书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-东盟自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-东盟自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-哥斯达黎加自由贸易协定原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-哥斯达黎加自由贸易协定原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-巴基斯坦自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-巴基斯坦自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-新加坡自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-新加坡自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-新西兰自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-新西兰自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-智利自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-智利自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\中国-秘鲁自贸区原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\中国-秘鲁自贸区原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\亚太贸易协定原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\亚太贸易协定原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\全国各口岸出入境卫生检疫查验工作情况统计表.xls = ..\documents\表样文件\全国各口岸出入境卫生检疫查验工作情况统计表.xls
-		..\documents\表样文件\全省各分支局减免收费情况统计表.xls = ..\documents\表样文件\全省各分支局减免收费情况统计表.xls
-		..\documents\表样文件\单位账号表.xls = ..\documents\表样文件\单位账号表.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表一.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表一.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表三.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表三.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表二.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表二.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表五.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表五.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表六.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表六.xls
-		..\documents\表样文件\卫生处理质量安全分析统计报表四.xls = ..\documents\表样文件\卫生处理质量安全分析统计报表四.xls
-		..\documents\表样文件\媒介生物报表.xls = ..\documents\表样文件\媒介生物报表.xls
-		..\documents\表样文件\普惠制原产地证明书签证情况（按机构）统计表.xls = ..\documents\表样文件\普惠制原产地证明书签证情况（按机构）统计表.xls
-		..\documents\表样文件\来源国家或地区统计表.xls = ..\documents\表样文件\来源国家或地区统计表.xls
-		..\documents\表样文件\江苏地区台湾海峡两岸直航检疫情况统计表.xls = ..\documents\表样文件\江苏地区台湾海峡两岸直航检疫情况统计表.xls
-		..\documents\表样文件\江苏检验检疫系统财务人员情况一览表.xls = ..\documents\表样文件\江苏检验检疫系统财务人员情况一览表.xls
-		..\documents\表样文件\江苏省各分支局卫生检疫情况统计表.xls = ..\documents\表样文件\江苏省各分支局卫生检疫情况统计表.xls
-		..\documents\表样文件\江苏省各地市进出口额统计表.xls = ..\documents\表样文件\江苏省各地市进出口额统计表.xls
-		..\documents\表样文件\海峡两岸经济合作框架协议原产地证书签证情况（按机构）统计表.xls = ..\documents\表样文件\海峡两岸经济合作框架协议原产地证书签证情况（按机构）统计表.xls
-		..\documents\表样文件\罚没收入核对统计表.xls = ..\documents\表样文件\罚没收入核对统计表.xls
-		..\documents\表样文件\陆路转关集装箱检疫查验统计表.xls = ..\documents\表样文件\陆路转关集装箱检疫查验统计表.xls
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "修改记录", "修改记录", "{4FD1440B-C7F1-41E4-8D8E-ED90D94714BB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2015-04-20修改", "2015-04-20修改", "{A50CE62F-9E4A-43EE-809B-61E457BDD7F5}"
-	ProjectSection(SolutionItems) = preProject
-		..\documents\修改记录\2015-04-20修改\修改需求及工作量估算.docx = ..\documents\修改记录\2015-04-20修改\修改需求及工作量估算.docx
-		..\documents\修改记录\2015-04-20修改\表样集合_不带数据.xls = ..\documents\修改记录\2015-04-20修改\表样集合_不带数据.xls
-		..\documents\修改记录\2015-04-20修改\表样集合_带数据.xls = ..\documents\修改记录\2015-04-20修改\表样集合_带数据.xls
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,8 +54,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A50CE62F-9E4A-43EE-809B-61E457BDD7F5} = {4FD1440B-C7F1-41E4-8D8E-ED90D94714BB}
 	EndGlobalSection
 EndGlobal
