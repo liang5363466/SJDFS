@@ -8,6 +8,7 @@
     <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Projects\CSharp\商检数据上报系统\publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Autofac.Configuration.dll">
@@ -15,6 +16,9 @@
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>11/12/2014 15:09:58</publishTime>
+    </File>
+    <File Include="bin/Interop.Shell32.dll">
+      <publishTime>05/03/2015 11:45:41</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>11/12/2014 15:10:09</publishTime>
@@ -26,25 +30,25 @@
       <publishTime>11/12/2014 15:10:41</publishTime>
     </File>
     <File Include="bin/SJRCS.BLL.dll">
-      <publishTime>11/12/2014 15:50:41</publishTime>
+      <publishTime>05/03/2015 11:45:43</publishTime>
     </File>
     <File Include="bin/SJRCS.Common.dll">
-      <publishTime>11/12/2014 15:50:40</publishTime>
+      <publishTime>05/03/2015 11:45:42</publishTime>
     </File>
     <File Include="bin/SJRCS.DAL.dll">
-      <publishTime>11/12/2014 15:50:41</publishTime>
+      <publishTime>05/03/2015 11:45:43</publishTime>
     </File>
     <File Include="bin/SJRCS.DALProfile.dll">
-      <publishTime>11/12/2014 15:50:40</publishTime>
+      <publishTime>05/03/2015 11:45:42</publishTime>
     </File>
     <File Include="bin/SJRCS.Excel.dll">
-      <publishTime>11/12/2014 15:50:40</publishTime>
+      <publishTime>05/03/2015 11:45:42</publishTime>
     </File>
     <File Include="bin/SJRCS.Model.dll">
-      <publishTime>11/12/2014 15:50:40</publishTime>
+      <publishTime>05/03/2015 11:45:42</publishTime>
     </File>
     <File Include="bin/SJRCS.Web.dll">
-      <publishTime>11/12/2014 15:50:42</publishTime>
+      <publishTime>05/03/2015 12:00:49</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>11/12/2014 15:09:59</publishTime>
@@ -818,7 +822,7 @@
       <publishTime>11/12/2014 15:10:47</publishTime>
     </File>
     <File Include="Scripts/Report/ViewAuditedData.js">
-      <publishTime>11/12/2014 15:10:47</publishTime>
+      <publishTime>04/25/2015 12:28:21</publishTime>
     </File>
     <File Include="Scripts/Report/ViewReportData.js">
       <publishTime>11/12/2014 15:10:47</publishTime>
@@ -842,13 +846,13 @@
       <publishTime>11/12/2014 15:10:47</publishTime>
     </File>
     <File Include="Scripts/Table/TableUpload.js">
-      <publishTime>11/12/2014 15:10:47</publishTime>
+      <publishTime>04/26/2015 17:01:55</publishTime>
     </File>
     <File Include="Scripts/Table/TableView.js">
-      <publishTime>11/12/2014 15:10:47</publishTime>
+      <publishTime>04/25/2015 12:33:48</publishTime>
     </File>
     <File Include="Scripts/Table/UploaderTables.js">
-      <publishTime>11/12/2014 15:10:47</publishTime>
+      <publishTime>04/18/2015 21:36:50</publishTime>
     </File>
     <File Include="Scripts/User/OrgUsers.js">
       <publishTime>11/12/2014 15:10:48</publishTime>
@@ -881,16 +885,16 @@
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Views/Contact/Contacts.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>05/03/2015 10:04:44</publishTime>
     </File>
     <File Include="Views/Contact/Main.cshtml">
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Views/Contact/OrgUsers.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>05/03/2015 10:04:31</publishTime>
     </File>
     <File Include="Views/Contact/UserContacts.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>05/03/2015 11:54:01</publishTime>
     </File>
     <File Include="Views/Home/Main.cshtml">
       <publishTime>11/12/2014 15:10:48</publishTime>
@@ -902,7 +906,7 @@
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Views/Report/FillTable.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>04/25/2015 13:34:44</publishTime>
     </File>
     <File Include="Views/Report/ReporterTables.cshtml">
       <publishTime>11/12/2014 15:10:48</publishTime>
@@ -953,7 +957,7 @@
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Views/Table/TableUpload.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>04/24/2015 22:52:07</publishTime>
     </File>
     <File Include="Views/Table/TableView.cshtml">
       <publishTime>11/12/2014 15:10:48</publishTime>
@@ -962,7 +966,7 @@
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Views/User/Login.cshtml">
-      <publishTime>11/12/2014 15:10:48</publishTime>
+      <publishTime>04/26/2015 11:18:59</publishTime>
     </File>
     <File Include="Views/User/OrgUsers.cshtml">
       <publishTime>11/12/2014 15:10:48</publishTime>
@@ -974,7 +978,7 @@
       <publishTime>11/12/2014 15:10:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/12/2014 15:50:58</publishTime>
+      <publishTime>05/03/2015 11:45:44</publishTime>
     </File>
   </ItemGroup>
 </Project>
