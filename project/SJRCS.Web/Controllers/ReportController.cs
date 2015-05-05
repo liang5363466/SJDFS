@@ -12,7 +12,6 @@ using Webdiyer.WebControls.Mvc;
 using SJRCS.Model;
 using SJRCS.Excel;
 using System.Reflection;
-using Shell32;
 using System.IO;
 namespace SJRCS.Web.Controllers
 {
@@ -103,18 +102,7 @@ namespace SJRCS.Web.Controllers
                 }
                 else 
                 {
-                    ShellClass sh = new ShellClass();
-                    Folder dir = sh.NameSpace(Path.GetDirectoryName(importSavePath));
-                    FolderItem item = dir.ParseName(Path.GetFileName(importSavePath));
-                    for (int i = 0; i < 30; i++)
-                    {
-                        string det = dir.GetDetailsOf(item, i);
-                        if (det.StartsWith("Table_SJDFS_"))
-                        {
-                            checkResult = tableInfo.UNIQUE_CODE.ToString() == det ? 1 : 0;
-                            break;
-                        }
-                    }
+                    checkResult = tableInfo.UNIQUE_CODE.ToString() == excelFile.FileName.Substring(0, 18) ? 1 : 0;
                 }
                 if (checkResult == 1)
                 {

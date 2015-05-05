@@ -23,7 +23,7 @@ $(function () {
     $("#tableFile").change(function () {
         var strFileName = $(this).val().replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi, "$1");
         if ($.trim($("#txtAuditDataName").val()) == 0) {
-            $("#txtAuditDataName").val(strFileName);
+            $("#txtAuditDataName").val(strFileName.substring(19));
             $("#txtAuditDataName").trigger("focus").trigger("blur");
         }
         var fileName = $(this).val();

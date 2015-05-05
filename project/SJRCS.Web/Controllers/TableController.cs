@@ -13,7 +13,6 @@ using SJRCS.Model;
 using System.IO;
 using SJRCS.Excel;
 using System.Diagnostics;
-using Shell32;
 using System.Reflection;
 namespace SJRCS.Web.Controllers
 {
@@ -81,20 +80,7 @@ namespace SJRCS.Web.Controllers
             ////表样实体属性设置
             dynamic tableInfo = new Dynamic();
             tableInfo.Name = Request["tableName"];
-
-            ShellClass sh = new ShellClass();
-            Folder dir = sh.NameSpace(Path.GetDirectoryName(fillTemplateSavePath));
-            FolderItem item = dir.ParseName(Path.GetFileName(fillTemplateSavePath));
-            for (int i = 0; i < 30; i++)
-            {
-                string det = dir.GetDetailsOf(item, i);
-                if (det.StartsWith("Table_SJDFS_"))
-                {
-                    tableInfo.UniqueCode = det;
-                    break;
-                }
-            }
-
+            tableInfo.UniqueCode = fillTemplate.FileName.Substring(0,18);
             tableInfo.ExportFile = tableName;
             tableInfo.FillFile = tableName;
             tableInfo.DataTable = Utils.GenerateDataTableName();

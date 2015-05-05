@@ -57,7 +57,7 @@ $(function () {
         if (formIsError) {
             $(this).next(".error-block").text("您选择的模板有误，请选择格式为.xls的Excel文件。");
         } else {
-            $('#txtTableFileName').val(strFileName);
+            $('#txtTableFileName').val(strFileName.substring(19));
         }
     });
 
