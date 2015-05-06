@@ -15,7 +15,7 @@
     <AssemblyName>SJRCS.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -40,7 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -235,6 +235,7 @@
     <Content Include="Content\Images\SysIcon\viewdata.gif" />
     <Content Include="Content\Images\SysIcon\viewdetail.gif" />
     <Content Include="Content\Images\tbg.gif" />
+    <Content Include="ErrorPage\Error.html" />
     <Content Include="ErrorPage\SessionOut.html" />
     <Content Include="Global.asax" />
     <Content Include="Html\CycleMonth.html" />
@@ -353,6 +354,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SJDFS.Logger\SJDFS.Logger.csproj">
+      <Project>{f922cee3-7745-4799-b843-c16e11cfe499}</Project>
+      <Name>SJDFS.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SJRCS.BLL\SJRCS.BLL.csproj">
       <Project>{49c4a681-5c0a-4523-b161-e8f2735e6a65}</Project>
       <Name>SJRCS.BLL</Name>
@@ -608,7 +613,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>10924</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2645/</IISUrl>
+          <IISUrl>http://192.168.1.101:8002/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

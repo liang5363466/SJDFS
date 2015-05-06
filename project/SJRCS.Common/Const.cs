@@ -56,6 +56,11 @@ namespace SJRCS.Common
         /// </summary>
         public static readonly string AuditedTemp = @"AppFiles\AuditedTemp\";
 
+        /// <summary>
+        /// 日志目录文件夹
+        /// </summary>
+        public static readonly string AppLogs = @"AppLogs\";
+
         static Const() 
         {
             ExportTemplate = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + ExportTemplate);
@@ -75,6 +80,9 @@ namespace SJRCS.Common
 
             AuditedTemp = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + AuditedTemp);
             if (!Directory.Exists(AuditedTemp)) Directory.CreateDirectory(AuditedTemp);
+
+            AppLogs = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + AppLogs);
+            if (!Directory.Exists(AppLogs)) Directory.CreateDirectory(AppLogs);
         }
     }
 }

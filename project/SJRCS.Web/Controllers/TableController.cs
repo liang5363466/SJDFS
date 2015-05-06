@@ -14,6 +14,7 @@ using System.IO;
 using SJRCS.Excel;
 using System.Diagnostics;
 using System.Reflection;
+using DataConvert.Logger;
 namespace SJRCS.Web.Controllers
 {
     public class TableController : BaseController
@@ -80,7 +81,7 @@ namespace SJRCS.Web.Controllers
             ////表样实体属性设置
             dynamic tableInfo = new Dynamic();
             tableInfo.Name = Request["tableName"];
-            tableInfo.UniqueCode = fillTemplate.FileName.Substring(0,18);
+            tableInfo.UniqueCode = fillTemplate.FileName.Substring(0, 18);
             tableInfo.ExportFile = tableName;
             tableInfo.FillFile = tableName;
             tableInfo.DataTable = Utils.GenerateDataTableName();
@@ -94,7 +95,7 @@ namespace SJRCS.Web.Controllers
             tableInfo.Type = int.Parse(Request["fillType"]);
 
             tableInfo.Version = RCS_TableVersion.New;
-            
+
             tableInfo.CycleFields = new List<Dynamic>();
 
             if (tableInfo.Type == RCS_TableType.Cycle)
@@ -105,7 +106,6 @@ namespace SJRCS.Web.Controllers
             ITable_SJDFS tableAnalyse = (ITable_SJDFS)Assembly.Load("SJRCS.Excel").CreateInstance("SJRCS.Excel." + tableInfo.UniqueCode);
             tableInfo.HeadCollection = tableAnalyse.GetTableHeadInfos();
             bll.AddTable(tableInfo);
-
             ViewBag.ReturnScript = @"window.top.jQuery.unblockUI();Dialog.returnValue = true;Dialog.close();";
             return View("TableUpload");
         }

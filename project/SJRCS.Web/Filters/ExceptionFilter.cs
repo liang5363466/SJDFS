@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataConvert.Logger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,13 +14,12 @@ namespace SJRCS.Web.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            filterContext.Controller.ViewData["Error"] = filterContext;
-            filterContext.Controller.ViewData["InnerError"] = filterContext.Exception.InnerException;
-            filterContext.Result = new ViewResult()
+            Log.Write(LogType.Exp, filterContext.Exception.Message+"内容："+filterContext.Exception.StackTrace);
+            if (filterContext.Exception.InnerException != null) 
             {
-                ViewName = "Error",
-                ViewData = filterContext.Controller.ViewData,
-            };
+                Log.Write(LogType.Exp, filterContext.Exception.InnerException.Message + "内容：" + filterContext.Exception.InnerException.StackTrace);
+            }
+            filterContext.Result = new ViewResult() { ViewName = "Error" };
             filterContext.ExceptionHandled = true;
         }
     }

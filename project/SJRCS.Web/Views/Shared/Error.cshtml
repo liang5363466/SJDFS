@@ -1,21 +1,14 @@
-﻿@{
-    ViewBag.Title = "出错啦";
-    dynamic errorObj = ViewData["Error"];
-    dynamic innerError = ViewData["InnerError"];
-}
- <script>window.top.jQuery.unblockUI();</script>
-<h2>程序异常</h2>
-控制器: @errorObj.RouteData.GetRequiredString("controller")<br />
-方法: @errorObj.RouteData.GetRequiredString("action")<br />
-异常消息: @errorObj.Exception.Message<br />
-调用堆栈: @errorObj.Exception.StackTrace<br />
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7;IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-@if (innerError != null) 
-{ 
-    <p>内部错误</p>
-    @innerError.Exception.Message
-    @innerError.Exception.StackTrace
-}
-
-
-<p>对不起，程序内部错误。
+<body>
+    <script>
+        window.top.location.href = "/ErrorPage/Error.html";
+    </script>
+</body>
+</html>

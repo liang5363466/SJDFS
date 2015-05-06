@@ -20,6 +20,9 @@
     <File Include="bin/Interop.Shell32.dll">
       <publishTime>05/05/2015 15:25:12</publishTime>
     </File>
+    <File Include="bin/LogTemplate.txt">
+      <publishTime>05/06/2015 21:20:14</publishTime>
+    </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>05/05/2015 18:44:26</publishTime>
     </File>
@@ -29,26 +32,29 @@
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>05/05/2015 18:44:26</publishTime>
     </File>
+    <File Include="bin/SJDFS.Logger.dll">
+      <publishTime>05/06/2015 21:21:39</publishTime>
+    </File>
     <File Include="bin/SJRCS.BLL.dll">
-      <publishTime>05/06/2015 08:18:51</publishTime>
+      <publishTime>05/06/2015 21:21:39</publishTime>
     </File>
     <File Include="bin/SJRCS.Common.dll">
-      <publishTime>05/06/2015 08:18:50</publishTime>
+      <publishTime>05/06/2015 21:21:38</publishTime>
     </File>
     <File Include="bin/SJRCS.DAL.dll">
-      <publishTime>05/06/2015 08:18:51</publishTime>
+      <publishTime>05/06/2015 21:21:39</publishTime>
     </File>
     <File Include="bin/SJRCS.DALProfile.dll">
-      <publishTime>05/06/2015 08:18:50</publishTime>
+      <publishTime>05/06/2015 21:21:39</publishTime>
     </File>
     <File Include="bin/SJRCS.Excel.dll">
-      <publishTime>05/06/2015 08:18:50</publishTime>
+      <publishTime>05/06/2015 21:21:39</publishTime>
     </File>
     <File Include="bin/SJRCS.Model.dll">
-      <publishTime>05/06/2015 08:18:50</publishTime>
+      <publishTime>05/06/2015 21:21:38</publishTime>
     </File>
     <File Include="bin/SJRCS.Web.dll">
-      <publishTime>05/06/2015 08:39:15</publishTime>
+      <publishTime>05/06/2015 21:54:16</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>05/05/2015 18:44:26</publishTime>
@@ -307,6 +313,9 @@
     </File>
     <File Include="ErrorPage/404.html">
       <publishTime>05/05/2015 18:44:24</publishTime>
+    </File>
+    <File Include="ErrorPage/Error.html">
+      <publishTime>05/06/2015 20:32:46</publishTime>
     </File>
     <File Include="ErrorPage/SessionOut.html">
       <publishTime>05/05/2015 18:44:24</publishTime>
@@ -942,7 +951,7 @@
       <publishTime>05/05/2015 18:44:25</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>05/06/2015 08:35:45</publishTime>
+      <publishTime>05/06/2015 20:31:04</publishTime>
     </File>
     <File Include="Views/Shared/_ContentLayout.cshtml">
       <publishTime>05/05/2015 18:44:25</publishTime>
@@ -981,7 +990,7 @@
       <publishTime>05/05/2015 18:44:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/06/2015 08:36:13</publishTime>
+      <publishTime>05/06/2015 18:46:17</publishTime>
     </File>
   </ItemGroup>
 </Project>
