@@ -354,10 +354,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SJDFS.Logger\SJDFS.Logger.csproj">
-      <Project>{f922cee3-7745-4799-b843-c16e11cfe499}</Project>
-      <Name>SJDFS.Logger</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SJRCS.BLL\SJRCS.BLL.csproj">
       <Project>{49c4a681-5c0a-4523-b161-e8f2735e6a65}</Project>
       <Name>SJRCS.BLL</Name>
@@ -377,6 +373,10 @@
     <ProjectReference Include="..\SJRCS.Excel\SJRCS.Excel.csproj">
       <Project>{793fe24b-533e-472c-b7f3-995be35c9777}</Project>
       <Name>SJRCS.Excel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRCS.Logger\SJRCS.Logger.csproj">
+      <Project>{832f0aa2-a32c-4c9f-b99e-322b5a6bb5a8}</Project>
+      <Name>SJRCS.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\SJRCS.Model\SJRCS.Model.csproj">
       <Project>{b8a69430-4421-426c-92e8-468aa1d34d30}</Project>
