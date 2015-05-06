@@ -14,6 +14,7 @@ namespace SJRCS.Web.Filters
         public void OnException(ExceptionContext filterContext)
         {
             filterContext.Controller.ViewData["Error"] = filterContext;
+            filterContext.Controller.ViewData["InnerError"] = filterContext.Exception.InnerException;
             filterContext.Result = new ViewResult()
             {
                 ViewName = "Error",
