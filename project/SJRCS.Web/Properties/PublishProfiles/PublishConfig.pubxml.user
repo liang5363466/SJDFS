@@ -21,7 +21,7 @@
       <publishTime>05/05/2015 15:25:12</publishTime>
     </File>
     <File Include="bin/LogTemplate.txt">
-      <publishTime>05/06/2015 21:20:14</publishTime>
+      <publishTime>05/06/2015 23:57:48</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>05/05/2015 18:44:26</publishTime>
@@ -36,25 +36,28 @@
       <publishTime>05/06/2015 21:21:39</publishTime>
     </File>
     <File Include="bin/SJRCS.BLL.dll">
-      <publishTime>05/06/2015 21:21:39</publishTime>
+      <publishTime>05/07/2015 08:47:35</publishTime>
     </File>
     <File Include="bin/SJRCS.Common.dll">
-      <publishTime>05/06/2015 21:21:38</publishTime>
+      <publishTime>05/07/2015 08:47:34</publishTime>
     </File>
     <File Include="bin/SJRCS.DAL.dll">
-      <publishTime>05/06/2015 21:21:39</publishTime>
+      <publishTime>05/07/2015 08:47:35</publishTime>
     </File>
     <File Include="bin/SJRCS.DALProfile.dll">
-      <publishTime>05/06/2015 21:21:39</publishTime>
+      <publishTime>05/07/2015 08:47:34</publishTime>
     </File>
     <File Include="bin/SJRCS.Excel.dll">
-      <publishTime>05/06/2015 21:21:39</publishTime>
+      <publishTime>05/07/2015 08:47:35</publishTime>
+    </File>
+    <File Include="bin/SJRCS.Logger.dll">
+      <publishTime>05/07/2015 08:47:34</publishTime>
     </File>
     <File Include="bin/SJRCS.Model.dll">
-      <publishTime>05/06/2015 21:21:38</publishTime>
+      <publishTime>05/07/2015 08:47:34</publishTime>
     </File>
     <File Include="bin/SJRCS.Web.dll">
-      <publishTime>05/06/2015 21:54:16</publishTime>
+      <publishTime>05/07/2015 08:47:36</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>05/05/2015 18:44:26</publishTime>
@@ -315,7 +318,7 @@
       <publishTime>05/05/2015 18:44:24</publishTime>
     </File>
     <File Include="ErrorPage/Error.html">
-      <publishTime>05/06/2015 20:32:46</publishTime>
+      <publishTime>05/07/2015 08:27:27</publishTime>
     </File>
     <File Include="ErrorPage/SessionOut.html">
       <publishTime>05/05/2015 18:44:24</publishTime>
@@ -990,7 +993,7 @@
       <publishTime>05/05/2015 18:44:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/06/2015 18:46:17</publishTime>
+      <publishTime>05/07/2015 08:47:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

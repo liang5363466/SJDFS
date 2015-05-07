@@ -14,10 +14,10 @@ namespace SJRCS.Web.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            Log.Write(LogType.Exp, filterContext.Exception.Message+"内容："+filterContext.Exception.StackTrace);
+            Log.Write(LogType.Exp, "消息：" + filterContext.Exception.Message + "<br/>内容：" + filterContext.Exception.StackTrace.Replace("\r\n","<br/>"));
             if (filterContext.Exception.InnerException != null) 
             {
-                Log.Write(LogType.Exp, filterContext.Exception.InnerException.Message + "内容：" + filterContext.Exception.InnerException.StackTrace);
+                Log.Write(LogType.Exp, "消息：" + filterContext.Exception.InnerException.Message + "<br/>内容：" + filterContext.Exception.InnerException.StackTrace.Replace("\r\n", "<br/>"));
             }
             filterContext.Result = new ViewResult() { ViewName = "Error" };
             filterContext.ExceptionHandled = true;
